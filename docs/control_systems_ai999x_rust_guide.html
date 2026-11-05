@@ -26,25 +26,25 @@ figcaption{font-size:9pt;color:#555}
 <h2>Contents</h2>
 <ul><li>1. Get it: desktop app, command line, browser, Python</li><li>2. Quick start</li><li>3. Writing inputs</li><li>4. Outcomes and exit codes</li><li>5. Scripts and agents: batch and JSON</li><li>6. Figures</li><li>7. In a web page or Node.js: WebAssembly</li><li>8. Every capability</li></ul>
 <h2>1. Get it</h2>
-<p>Version 1.4.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS; the newest version is always under https://www.ai999x.com/downloads/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/</p>
-<table><thead><tr><th>what</th><th>system</th><th>download</th></tr></thead><tbody><tr><td>Desktop app: Control Systems</td><td>Windows x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-control-systems-1.4.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: Control Systems</td><td>Linux x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-control-systems-1.4.0-linux-x86_64.tar.gz</td></tr><tr><td>Desktop app: all models</td><td>Windows x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: all models</td><td>Linux x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz</td></tr><tr><td>Command line</td><td>Windows x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip</td></tr><tr><td>Command line</td><td>Linux x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz</td></tr></tbody></table>
+<p>Version 1.4.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS; the newest version is always under https://downloads.ai999x.com/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/</p>
+<table><thead><tr><th>what</th><th>system</th><th>download</th></tr></thead><tbody><tr><td>Desktop app: Control Systems</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-control-systems-1.4.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: Control Systems</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-control-systems-1.4.0-linux-x86_64.tar.gz</td></tr><tr><td>Desktop app: all models</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: all models</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz</td></tr><tr><td>Command line</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip</td></tr><tr><td>Command line</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz</td></tr></tbody></table>
 <h3>Desktop app</h3>
 <p>Control Systems in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-control-systems-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-control-systems.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:</p>
-<pre><code class="shell">curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-control-systems-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-control-systems-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 tar xzf ai999x-control-systems-1.4.0-linux-x86_64.tar.gz
 ./ai999x-control-systems-1.4.0-linux-x86_64/ai999x-control-systems</code></pre>
 <p>It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:</p>
-<pre><code class="shell">curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 tar xzf ai999x-1.4.0-linux-x86_64.tar.gz
 ./ai999x-1.4.0-linux-x86_64/ai999x</code></pre>
 <h3>Command line — Linux</h3>
 <p>The bundle holds one program per model; <code>control-systems</code> is this one. The checksum line should print OK.</p>
-<pre><code class="shell">curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 mkdir -p ~/.local/share &amp;&amp; tar xzf ai999x-cli-1.4.0-linux-x86_64.tar.gz -C ~/.local/share
 echo &#x27;export PATH=&quot;$HOME/.local/share/ai999x-cli-1.4.0-linux-x86_64:$PATH&quot;&#x27; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc
@@ -52,8 +52,8 @@ control-systems --version</code></pre>
 <h3>Command line — Windows (PowerShell)</h3>
 <p>The fourth line should print True.</p>
 <pre><code class="powershell">$F = &quot;ai999x-cli-1.4.0-windows-x86_64.zip&quot;
-Invoke-WebRequest &quot;https://www.ai999x.com/downloads/desktop/1.4.0/$F&quot; -OutFile $F
-Invoke-WebRequest &quot;https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS&quot; -OutFile SHA256SUMS
+Invoke-WebRequest &quot;https://downloads.ai999x.com/desktop/1.4.0/$F&quot; -OutFile $F
+Invoke-WebRequest &quot;https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS&quot; -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split &#x27; &#x27;)[0]
 Expand-Archive $F -DestinationPath &quot;$env:LOCALAPPDATA\AI999X&quot; -Force
 $D = &quot;$env:LOCALAPPDATA\AI999X\ai999x-cli-1.4.0-windows-x86_64&quot;; $env:Path += &quot;;$D&quot;
@@ -139,15 +139,9 @@ NEEDS_INPUT: ctrl_stability_margins needs den (denominator of L(s)). Example: so
 [
   {
     &quot;slug&quot;: &quot;ctrl-stability-margins-live-1&quot;,
-    &quot;title&quot;: &quot;Phase margin in degrees as numerator of the open loop L(s), entry 1 varies&quot;,
-    &quot;caption&quot;: &quot;Phase margin in degrees as num[1] runs from 2.5 to 17.5, every other input as you entered it (3 solutions). Marked: your num[1] = 10 gives pm_deg = -13. Your inputs: num = (list), den = (list).&quot;,
-    &quot;file&quot;: &quot;.\\ctrl-stability-margins-live-1.svg&quot;
-  },
-  {
-    &quot;slug&quot;: &quot;ctrl-stability-margins-live-2&quot;,
     &quot;title&quot;: &quot;The computed values side by side&quot;,
     &quot;caption&quot;: &quot;Every answer of one unit for your inputs: gm (gain margin (ratio)) = 0.6; gm_db (gain margin in dB) = -4.437; pm_deg (phase margin in degrees) = -13. Your inputs: num = (list), den = (list).&quot;,
-    &quot;file&quot;: &quot;.\\ctrl-stability-margins-live-2.svg&quot;
+    &quot;file&quot;: &quot;.\\ctrl-stability-margins-live-1.svg&quot;
   }
 ]</code></pre>
 <h3>2.10 Many questions at once</h3>
@@ -180,15 +174,9 @@ answers = [json.loads(line) for line in out.splitlines()]</code></pre>
 [
   {
     &quot;slug&quot;: &quot;ctrl-stability-margins-live-1&quot;,
-    &quot;title&quot;: &quot;Phase margin in degrees as numerator of the open loop L(s), entry 1 varies&quot;,
-    &quot;caption&quot;: &quot;Phase margin in degrees as num[1] runs from 2.5 to 17.5, every other input as you entered it (3 solutions). Marked: your num[1] = 10 gives pm_deg = -13. Your inputs: num = (list), den = (list).&quot;,
-    &quot;file&quot;: &quot;.\\ctrl-stability-margins-live-1.svg&quot;
-  },
-  {
-    &quot;slug&quot;: &quot;ctrl-stability-margins-live-2&quot;,
     &quot;title&quot;: &quot;The computed values side by side&quot;,
     &quot;caption&quot;: &quot;Every answer of one unit for your inputs: gm (gain margin (ratio)) = 0.6; gm_db (gain margin in dB) = -4.437; pm_deg (phase margin in degrees) = -13. Your inputs: num = (list), den = (list).&quot;,
-    &quot;file&quot;: &quot;.\\ctrl-stability-margins-live-2.svg&quot;
+    &quot;file&quot;: &quot;.\\ctrl-stability-margins-live-1.svg&quot;
   }
 ]</code></pre>
 <h2>7. In a web page or Node.js: WebAssembly</h2>

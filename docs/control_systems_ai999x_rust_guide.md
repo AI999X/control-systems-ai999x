@@ -17,24 +17,24 @@ Control Systems covers transfer functions, poles and zeros, step and frequency r
 
 ## 1. Get it
 
-Version 1.4.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS; the newest version is always under https://www.ai999x.com/downloads/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/
+Version 1.4.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS; the newest version is always under https://downloads.ai999x.com/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/
 
 | what | system | download |
 |---|---|---|
-| Desktop app: Control Systems | Windows x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-control-systems-1.4.0-windows-x86_64.zip |
-| Desktop app: Control Systems | Linux x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-control-systems-1.4.0-linux-x86_64.tar.gz |
-| Desktop app: all models | Windows x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip |
-| Desktop app: all models | Linux x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz |
-| Command line | Windows x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip |
-| Command line | Linux x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz |
+| Desktop app: Control Systems | Windows x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-control-systems-1.4.0-windows-x86_64.zip |
+| Desktop app: Control Systems | Linux x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-control-systems-1.4.0-linux-x86_64.tar.gz |
+| Desktop app: all models | Windows x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip |
+| Desktop app: all models | Linux x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz |
+| Command line | Windows x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip |
+| Command line | Linux x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz |
 
 ### Desktop app
 
 Control Systems in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-control-systems-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-control-systems.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
 
 ```shell
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-control-systems-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-control-systems-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 tar xzf ai999x-control-systems-1.4.0-linux-x86_64.tar.gz
 ./ai999x-control-systems-1.4.0-linux-x86_64/ai999x-control-systems
@@ -43,8 +43,8 @@ tar xzf ai999x-control-systems-1.4.0-linux-x86_64.tar.gz
 It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
 
 ```shell
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 tar xzf ai999x-1.4.0-linux-x86_64.tar.gz
 ./ai999x-1.4.0-linux-x86_64/ai999x
@@ -55,8 +55,8 @@ tar xzf ai999x-1.4.0-linux-x86_64.tar.gz
 The bundle holds one program per model; `control-systems` is this one. The checksum line should print OK.
 
 ```shell
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 mkdir -p ~/.local/share && tar xzf ai999x-cli-1.4.0-linux-x86_64.tar.gz -C ~/.local/share
 echo 'export PATH="$HOME/.local/share/ai999x-cli-1.4.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
@@ -69,8 +69,8 @@ The fourth line should print True.
 
 ```powershell
 $F = "ai999x-cli-1.4.0-windows-x86_64.zip"
-Invoke-WebRequest "https://www.ai999x.com/downloads/desktop/1.4.0/$F" -OutFile $F
-Invoke-WebRequest "https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS" -OutFile SHA256SUMS
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.4.0/$F" -OutFile $F
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS" -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split ' ')[0]
 Expand-Archive $F -DestinationPath "$env:LOCALAPPDATA\AI999X" -Force
 $D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.4.0-windows-x86_64"; $env:Path += ";$D"
@@ -208,15 +208,9 @@ $ control-systems figures ctrl_stability_margins "num=[10]" "den=[1, 3, 2, 0]" -
 [
   {
     "slug": "ctrl-stability-margins-live-1",
-    "title": "Phase margin in degrees as numerator of the open loop L(s), entry 1 varies",
-    "caption": "Phase margin in degrees as num[1] runs from 2.5 to 17.5, every other input as you entered it (3 solutions). Marked: your num[1] = 10 gives pm_deg = -13. Your inputs: num = (list), den = (list).",
-    "file": ".\\ctrl-stability-margins-live-1.svg"
-  },
-  {
-    "slug": "ctrl-stability-margins-live-2",
     "title": "The computed values side by side",
     "caption": "Every answer of one unit for your inputs: gm (gain margin (ratio)) = 0.6; gm_db (gain margin in dB) = -4.437; pm_deg (phase margin in degrees) = -13. Your inputs: num = (list), den = (list).",
-    "file": ".\\ctrl-stability-margins-live-2.svg"
+    "file": ".\\ctrl-stability-margins-live-1.svg"
   }
 ]
 ```
@@ -299,15 +293,9 @@ $ control-systems figures ctrl_stability_margins "num=[10]" "den=[1, 3, 2, 0]" -
 [
   {
     "slug": "ctrl-stability-margins-live-1",
-    "title": "Phase margin in degrees as numerator of the open loop L(s), entry 1 varies",
-    "caption": "Phase margin in degrees as num[1] runs from 2.5 to 17.5, every other input as you entered it (3 solutions). Marked: your num[1] = 10 gives pm_deg = -13. Your inputs: num = (list), den = (list).",
-    "file": ".\\ctrl-stability-margins-live-1.svg"
-  },
-  {
-    "slug": "ctrl-stability-margins-live-2",
     "title": "The computed values side by side",
     "caption": "Every answer of one unit for your inputs: gm (gain margin (ratio)) = 0.6; gm_db (gain margin in dB) = -4.437; pm_deg (phase margin in degrees) = -13. Your inputs: num = (list), den = (list).",
-    "file": ".\\ctrl-stability-margins-live-2.svg"
+    "file": ".\\ctrl-stability-margins-live-1.svg"
   }
 ]
 ```
