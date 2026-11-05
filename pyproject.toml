@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "control-systems-ai999x"
-version = "1.0.0"
+version = "1.1.0"
 description = "Offline control systems solver: transfer functions and poles/zeros, step and frequency response metrics, stability (Routh-Hurwitz, gain and phase margins, Nyquist), root locus, state space (controllability, observability, pole placement), LQR and Kalman filters, discretization and PID tuning, with steps, LaTeX and honest refusals"
 readme = "README.md"
 requires-python = ">=3.10"
