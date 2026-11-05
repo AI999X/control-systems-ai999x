@@ -215,7 +215,7 @@ Call `solve("<id>", **inputs)` with plain numbers; the result's `values` holds e
 
 <a id="ctrl_first_order_step"></a>
 
-### Step response of a first-order system — `ctrl_first_order_step`
+### Step response of a first-order system: `ctrl_first_order_step`
 
 The output y(t) = K A (1 - e^{-t/tau}) of K/(tau s + 1) at time t after a step of size A, and the fraction of the final value reached.
 
@@ -240,6 +240,10 @@ $$
 - **Assumes:** $\tau > 0$; $t  \geq  0$; K and A not zero
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![y (output at time t) against tau (time constant in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-first-order-step-curve)
+
+*y (output at time t) against tau (time constant in seconds) from 0.5 to 50 on a logarithmic axis. One curve for each value of K (steady-state (DC) gain of the system): 2, 1, 4. Other inputs as in the worked example: t = 5. 41 points per curve computed by control-systems-ai999x; marked: the worked example, tau = 5, y = 1.26424.*
+
 ```python
 control_systems_ai999x.solve('ctrl_first_order_step', K=2, tau=5, t=5)
 # -> y = 1.26424, fraction = 0.632121, y_final = 2   (SOLVED)
@@ -262,7 +266,7 @@ control_systems_ai999x.solve('ctrl_first_order_step', K=1, tau=2, t=4, A=10)
 
 <a id="ctrl_first_order_specs"></a>
 
-### Time and frequency specifications of a first-order system — `ctrl_first_order_specs`
+### Time and frequency specifications of a first-order system, `ctrl_first_order_specs`
 
 Time constant, $10-90$ % rise time tau ln 9, 2 % and 5 % settling times tau ln 50 and tau ln 20, bandwidth $1/\tau$ and DC gain of K/(tau s + 1).
 
@@ -288,6 +292,10 @@ $$
 - **Assumes:** $\tau > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![rise_time (10-90 % rise time) against tau (time constant in seconds) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-first-order-specs-curve)
+
+*rise_time (10-90 % rise time) against tau (time constant in seconds) from 1 to 3. Outputs with the same unit drawn together: time_constant (time constant (63.2 % of the final value)), settling_time_2 (2 % settling time), settling_time_5 (5 % settling time). Other inputs as in the worked example: K = 3. 31 points computed by control-systems-ai999x; marked: the worked example, tau = 2, rise_time = 4.39445 s.*
+
 ```python
 control_systems_ai999x.solve('ctrl_first_order_specs', K=3, tau=2)
 # -> time_constant = 2 s, rise_time = 4.39445 s, settling_time_2 = 7.82405 s, settling_time_5 = 5.99146 s, bandwidth = 0.5 rad/s, dc_gain = 3   (SOLVED)
@@ -310,7 +318,7 @@ control_systems_ai999x.solve('ctrl_first_order_specs', K=1, tau=0.1)
 
 <a id="ctrl_first_order_freq"></a>
 
-### Frequency response of a first-order lag — `ctrl_first_order_freq`
+### Frequency response of a first-order lag: `ctrl_first_order_freq`
 
 Magnitude K/sqrt(1 + (w tau)^2), its value in dB and the phase -atan(w tau) of K/(tau s + 1) at the angular frequency w.
 
@@ -334,6 +342,10 @@ $$
 - **Assumes:** $K > 0$; $\tau > 0$; $w  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![magnitude (gain |G(jw)|) against tau (time constant in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-first-order-freq-curve)
+
+*magnitude (gain |G(jw)|) against tau (time constant in seconds) from 0.1 to 10 on a logarithmic axis. One curve for each value of K (DC gain (positive)): 10, 5, 20. Other inputs as in the worked example: w = 1. 41 points per curve computed by control-systems-ai999x; marked: the worked example, tau = 1, magnitude = 7.07107.*
+
 ```python
 control_systems_ai999x.solve('ctrl_first_order_freq', K=10, tau=1, w=1)
 # -> magnitude = 7.07107, magnitude_db = 16.9897, phase_deg = -45   (SOLVED)
@@ -356,7 +368,7 @@ control_systems_ai999x.solve('ctrl_first_order_freq', K=1, tau=0.5, w=4)
 
 <a id="ctrl_mass_spring_damper"></a>
 
-### Mass-spring-damper natural frequency and damping ratio — `ctrl_mass_spring_damper`
+### Mass-spring-damper natural frequency and damping ratio, `ctrl_mass_spring_damper`
 
 Natural frequency sqrt(k/m), damping ratio c/(2 sqrt(k m)), damped frequency and static compliance $1/k$ of m x'' + c x' + k $x = F.$
 
@@ -382,6 +394,14 @@ $$
 - **Assumes:** $m > 0$; $c  \geq  0$; $k > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![damping class (damping) over m (mass in kg) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-mass-spring-damper-decision)
+
+*damping class (damping) over m (mass in kg) from 0.1 to 10 and c (damping coefficient in N*s/m) from 0.2 to 20 (logarithmic axes): each of the 31 × 21 cells is one run of control-systems-ai999x, coloured by the verdict it returned, overdamped: 227 cells, underdamped: 424 cells. Other inputs as in the worked example: k = 4. Marked: the worked example, m = 1, c = 2 → underdamped.*
+
+![wn (undamped natural frequency) against m (mass in kg) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-mass-spring-damper-curve)
+
+*wn (undamped natural frequency) against m (mass in kg) from 0.5 to 1.5. One curve for each value of k (spring stiffness in N/m): 4, 2, 8. Other inputs as in the worked example: c = 2. 31 points per curve computed by control-systems-ai999x; marked: the worked example, m = 1, wn = 2 rad/s.*
+
 ```python
 control_systems_ai999x.solve('ctrl_mass_spring_damper', m=1, c=2, k=4)
 # -> wn = 2 rad/s, zeta = 0.5, wd = 1.73205 rad/s, dc_gain = 0.25, damping = underdamped   (SOLVED)
@@ -404,7 +424,7 @@ control_systems_ai999x.solve('ctrl_mass_spring_damper', m=2, c=8, k=8)
 
 <a id="ctrl_second_order_params"></a>
 
-### Natural frequency and damping ratio of a second-order denominator — `ctrl_second_order_params`
+### Natural frequency and damping ratio of a second-order denominator, `ctrl_second_order_params`
 
 wn, zeta, the decay rate $\sigma = \zeta$ wn, the damped frequency wd and the DC gain of K/(a2 $s^{2} + a_{1}$ s + a0).
 
@@ -430,6 +450,10 @@ $$
 - **Assumes:** $a_{0}/a_{2} > 0$; $a_{1}/a_{2}  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![wn (natural frequency) as value 3 of den (denominator [a2, a1, a0]) moves from 0 to 37, the other values as given ([1, 4, 25]); 40 runs of control-systems-ai999x](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-second-order-params-sensitivity)
+
+*wn (natural frequency) as value 3 of den (denominator [a2, a1, a0]) moves from 0 to 37, the other values as given ([1, 4, 25]); 40 runs of control-systems-ai999x. Marked: the worked example, den[3] = 25, wn = 5 rad/s.*
+
 ```python
 control_systems_ai999x.solve('ctrl_second_order_params', den=[1, 4, 25])
 # -> wn = 5 rad/s, zeta = 0.4, sigma = 2, wd = 4.58258 rad/s, damping = underdamped, dc_gain = 1   (SOLVED)
@@ -452,7 +476,7 @@ control_systems_ai999x.solve('ctrl_second_order_params', den=[2, 12, 50], K=50)
 
 <a id="ctrl_percent_overshoot"></a>
 
-### Percent overshoot from the damping ratio — `ctrl_percent_overshoot`
+### Percent overshoot from the damping ratio: `ctrl_percent_overshoot`
 
 Percent overshoot 100 e^{-zeta pi/sqrt(1 - zeta^2)} of the step response of a standard second-order system, and the pole angle acos(zeta).
 
@@ -473,6 +497,14 @@ $$
 - **Method:** peak of the step response at $t = pi/wd$
 - **Assumes:** $0  \leq  \zeta < 1$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![PO (percent overshoot (%)) against zeta (damping ratio (0 <= zeta < 1))](https://huggingface.co/AI999X/control-systems-ai999x/resolve/main/figures/ctrl-percent-overshoot-po-vs-zeta.svg)
+
+*PO (percent overshoot (%)) against zeta (damping ratio (0 <= zeta < 1)). 31 points computed by control-systems-ai999x; marked: zeta = 0.5, PO = 16.3034.*
+
+![PO (percent overshoot (%)) against zeta (damping ratio (0 <= zeta < 1)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-percent-overshoot-curve)
+
+*PO (percent overshoot (%)) against zeta (damping ratio (0 <= zeta < 1)) from 0.02 to 0.98. 41 points computed by control-systems-ai999x; marked: the worked example, zeta = 0.5, PO = 16.3034.*
 
 ```python
 control_systems_ai999x.solve('ctrl_percent_overshoot', zeta=0.5)
@@ -496,7 +528,7 @@ control_systems_ai999x.solve('ctrl_percent_overshoot', zeta=0.7)
 
 <a id="ctrl_damping_from_overshoot"></a>
 
-### Damping ratio from percent overshoot — `ctrl_damping_from_overshoot`
+### Damping ratio from percent overshoot: `ctrl_damping_from_overshoot`
 
 The damping ratio $\zeta = -ln$(OS)/sqrt($pi^{2} + ln^{2}$ OS) that gives a stated overshoot.
 
@@ -516,6 +548,10 @@ $$
 - **Method:** invert $OS = exp$(-zeta pi / sqrt(1 - zeta^2))
 - **Assumes:** $0 < OS < 100$ %
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![zeta (damping ratio) against OS (overshoot (write 20% or 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-damping-from-overshoot-curve)
+
+*zeta (damping ratio) against OS (overshoot (write 20% or 0.2)) from 0.02 to 2 on a logarithmic axis. 34 points computed by control-systems-ai999x; marked: the worked example, OS = 0.2, zeta = 0.45595.*
 
 ```python
 control_systems_ai999x.solve('ctrl_damping_from_overshoot', OS=0.2)
@@ -541,7 +577,7 @@ control_systems_ai999x.solve('ctrl_damping_from_overshoot', OS=0.05)
 
 <a id="ctrl_peak_time"></a>
 
-### Peak time of a second-order step response — `ctrl_peak_time`
+### Peak time of a second-order step response: `ctrl_peak_time`
 
 Peak time $Tp = pi/wd$ and damped frequency $wd = wn$ sqrt(1 - zeta^2) of wn^2/(s^2 + 2 zeta wn s + wn^2).
 
@@ -562,6 +598,14 @@ $$
 - **Method:** first zero of the impulse response
 - **Assumes:** $0  \leq  \zeta < 1$; $wn > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![Tp (peak time) against zeta (damping ratio (0 <= zeta < 1)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-peak-time-curve)
+
+*Tp (peak time) against zeta (damping ratio (0 <= zeta < 1)) from 0.02 to 0.98. One curve for each value of wn (natural frequency in rad/s): 5, 2.5, 10. 41 points per curve computed by control-systems-ai999x; marked: the worked example, zeta = 0.6, Tp = 0.785398 s.*
+
+![Tp (peak time) over wn (natural frequency in rad/s) from 2](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-peak-time-field)
+
+*Tp (peak time) over wn (natural frequency in rad/s) from 2.5 to 7.5 and zeta (damping ratio (0 <= zeta < 1)) from 0.02 to 0.98: each of the 21 × 15 cells is one run of control-systems-ai999x, shaded by its value (light 0.418963 s to dark 6.31484 s); iso-lines at Tp = 1, 2, 3, 4, 5 s. Marked: the worked example, wn = 5, zeta = 0.6, Tp = 0.785398 s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_peak_time', zeta=0.6, wn=5)
@@ -585,7 +629,7 @@ control_systems_ai999x.solve('ctrl_peak_time', zeta=0, wn=2)
 
 <a id="ctrl_settling_time"></a>
 
-### Settling time of a second-order system (rule and envelope) — `ctrl_settling_time`
+### Settling time of a second-order system (rule and envelope), `ctrl_settling_time`
 
 Settling time by the rule 4/(zeta wn) (2 % band) or 3/(zeta wn) (5 %), and the time at which the decay envelope enters the band.
 
@@ -609,6 +653,14 @@ $$
 - **Assumes:** $0 < \zeta < 1$; band 2 % or 5 %
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Ts (settling time by the rule of thumb) against zeta (damping ratio (0 < zeta < 1)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-settling-time-curve)
+
+*Ts (settling time by the rule of thumb) against zeta (damping ratio (0 < zeta < 1)) from 0.02 to 0.98. One curve for each value of wn (natural frequency in rad/s): 4, 2, 8. 41 points per curve computed by control-systems-ai999x; marked: the worked example, zeta = 0.5, Ts = 2 s.*
+
+![Ts (settling time by the rule of thumb) over zeta (damping ratio (0 < zeta < 1)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-settling-time-field)
+
+*Ts (settling time by the rule of thumb) over zeta (damping ratio (0 < zeta < 1)) from 0.02 to 0.98 and wn (natural frequency in rad/s) from 2 to 6: each of the 21 × 15 cells is one run of control-systems-ai999x, shaded by its value (light 0.680272 s to dark 100 s); iso-lines at Ts = 20, 40, 60, 80 s. Marked: the worked example, zeta = 0.5, wn = 4, Ts = 2 s.*
+
 ```python
 control_systems_ai999x.solve('ctrl_settling_time', zeta=0.5, wn=4)
 # -> Ts = 2 s, Ts_envelope = 2.02793 s, time_constant = 0.5 s   (SOLVED)
@@ -631,7 +683,7 @@ control_systems_ai999x.solve('ctrl_settling_time', zeta=0.5, wn=4, band=0.05)
 
 <a id="ctrl_dc_gain"></a>
 
-### DC gain and final value of a step response — `ctrl_dc_gain`
+### DC gain and final value of a step response, `ctrl_dc_gain`
 
 The DC gain G(0) of a stable transfer function and the final value G(0) A of its response to a step of size A.
 
@@ -653,6 +705,10 @@ $$
 - **Method:** G(0) = num(0)/den(0) after a stability check of the poles
 - **Assumes:** proper G(s); every pole in the left half plane
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![dc_gain (DC gain G(0)) as value 3 of den (denominator coefficients, highest power of s first) moves from 0 to 4, the other values as given ([1, 3, 2]); 40 runs of control-systems-ai999x](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-dc-gain-sensitivity)
+
+*dc_gain (DC gain G(0)) as value 3 of den (denominator coefficients, highest power of s first) moves from 0 to 4, the other values as given ([1, 3, 2]); 40 runs of control-systems-ai999x. Other inputs: num = [10]. Marked: the worked example, den[3] = 2, dc_gain = 5.*
 
 ```python
 control_systems_ai999x.solve('ctrl_dc_gain', num=[10], den=[1, 3, 2])
@@ -677,7 +733,7 @@ control_systems_ai999x.solve('ctrl_dc_gain', num=[2, 6], den=[1, 5, 4], A=3)
 
 <a id="ctrl_pole_stability"></a>
 
-### Poles and stability of a characteristic polynomial — `ctrl_pole_stability`
+### Poles and stability of a characteristic polynomial, `ctrl_pole_stability`
 
 The roots (poles) of a characteristic polynomial and whether the system is asymptotically stable, marginally stable or unstable.
 
@@ -698,6 +754,10 @@ $$
 - **Method:** roots by the Aberth-Ehrlich iteration; simple poles on the imaginary axis are marginal, repeated ones unstable
 - **Assumes:** degree 1 or more
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![the poles (poles) returned by control-systems-ai999x for the worked example (den = [1, 6, 11, 6]), drawn in the complex plane: -3 + 0i, -2 + 0i, -1 + 0i](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pole-stability-complex)
+
+*the poles (poles) returned by control-systems-ai999x for the worked example (den = [1, 6, 11, 6]), drawn in the complex plane: -3 + 0i, -2 + 0i, -1 + 0i.*
 
 ```python
 control_systems_ai999x.solve('ctrl_pole_stability', den=[1, 6, 11, 6])
@@ -726,7 +786,7 @@ control_systems_ai999x.solve('ctrl_pole_stability', den=[1, -1, 2])
 
 <a id="ctrl_closed_loop_first_order_p"></a>
 
-### Proportional control of a first-order plant — `ctrl_closed_loop_first_order_p`
+### Proportional control of a first-order plant, `ctrl_closed_loop_first_order_p`
 
 Closed-loop DC gain K Kp/(1 + K Kp), time constant tau/(1 + K Kp), steady-state error 1/(1 + K Kp) to a unit step and the closed-loop pole, for K/(tau s + 1) under unity feedback with gain Kp.
 
@@ -751,6 +811,10 @@ $$
 - **Assumes:** $\tau > 0$; $1 + K$ $Kp > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![tau_cl (closed-loop time constant) against K (plant DC gain) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-closed-loop-first-order-p-curve)
+
+*tau_cl (closed-loop time constant) against K (plant DC gain) from 0.2 to 20 on a logarithmic axis. One curve for each value of tau (plant time constant in seconds): 10, 5, 20. Other inputs as in the worked example: Kp = 4.5. 41 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, tau_cl = 1 s.*
+
 ```python
 control_systems_ai999x.solve('ctrl_closed_loop_first_order_p', K=2, tau=10, Kp=4.5)
 # -> dc_gain_cl = 0.9, tau_cl = 1 s, ess = 0.1, pole = -1   (SOLVED)
@@ -773,7 +837,7 @@ control_systems_ai999x.solve('ctrl_closed_loop_first_order_p', K=1, tau=3, Kp=2)
 
 <a id="ctrl_second_order_from_poles"></a>
 
-### Second-order specifications from the pole location — `ctrl_second_order_from_poles`
+### Second-order specifications from the pole location, `ctrl_second_order_from_poles`
 
 From poles at -sigma +/- j wd: wn, zeta, peak time pi/wd, 2 % settling time $4/\sigma$ and percent overshoot 100 e^{-sigma pi/wd}.
 
@@ -798,6 +862,14 @@ $$
 - **Assumes:** $\sigma > 0$; $wd > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![zeta (damping ratio) against sigma (decay rate: the poles' real part is -sigma (sigma > 0)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-second-order-from-poles-curve)
+
+*zeta (damping ratio) against sigma (decay rate: the poles' real part is -sigma (sigma > 0)) from 0.3 to 30 on a logarithmic axis. One curve for each value of wd (imaginary part of the poles (rad/s)): 4, 2, 8. 41 points per curve computed by control-systems-ai999x; marked: the worked example, sigma = 3, zeta = 0.6.*
+
+![zeta (damping ratio) over sigma (decay rate: the poles' real part is -sigma (sigma > 0)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-second-order-from-poles-field)
+
+*zeta (damping ratio) over sigma (decay rate: the poles' real part is -sigma (sigma > 0)) from 0.3 to 30 and wd (imaginary part of the poles (rad/s)) from 0.4 to 40 (logarithmic axes): each of the 21 × 15 cells is one run of control-systems-ai999x, shaded by its value (light 0.00749979 to dark 0.999911); iso-lines at zeta = 0.2, 0.4, 0.6, 0.8. Marked: the worked example, sigma = 3, wd = 4, zeta = 0.6.*
+
 ```python
 control_systems_ai999x.solve('ctrl_second_order_from_poles', sigma=3, wd=4)
 # -> wn = 5 rad/s, zeta = 0.6, Tp = 0.785398 s, Ts = 1.33333 s, PO = 9.47802   (SOLVED)
@@ -820,7 +892,7 @@ control_systems_ai999x.solve('ctrl_second_order_from_poles', sigma=2, wd=2)
 
 <a id="ctrl_s_to_z_pole"></a>
 
-### Mapping an s-plane pole to the z-plane (z = e^{sT}) — `ctrl_s_to_z_pole`
+### Mapping an s-plane pole to the z-plane (z = e^{sT}), `ctrl_s_to_z_pole`
 
 The discrete pole $z = e$^{sT} of a continuous pole $s = s_re + j$ s_im sampled with period T: real and imaginary parts, magnitude e^{s_re T} and angle s_im T.
 
@@ -845,6 +917,14 @@ $$
 - **Assumes:** $T > 0$; $0  \leq  s_im$ $T < pi$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![z_mag (|z| = e^{s_re T}) against s_re (real part of the s-plane pole (1/s)), with T = 0](https://huggingface.co/AI999X/control-systems-ai999x/resolve/main/figures/ctrl-s-to-z-pole-z-mag-vs-s-re.svg)
+
+*z_mag (|z| = e^{s_re T}) against s_re (real part of the s-plane pole (1/s)), with T = 0.1, s_im = 0. 31 points computed by control-systems-ai999x; marked: s_re = -2, z_mag = 0.818731.*
+
+![z_mag (|z| = e^{s_re T}) against T (sampling period in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-s-to-z-pole-curve)
+
+*z_mag (|z| = e^{s_re T}) against T (sampling period in seconds) from 0.01 to 1 on a logarithmic axis. One curve for each value of s_re (real part of the s-plane pole (1/s)): -2, -1, -4. Other inputs as in the worked example: s_im = 0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, T = 0.1, z_mag = 0.818731.*
+
 ```python
 control_systems_ai999x.solve('ctrl_s_to_z_pole', s_re=-2, s_im=0, T=0.1)
 # -> z_re = 0.818731, z_im = 0, z_mag = 0.818731, z_angle = 0   (SOLVED)
@@ -867,7 +947,7 @@ control_systems_ai999x.solve('ctrl_s_to_z_pole', s_re=-1, s_im=3.14159265359, T=
 
 <a id="ctrl_zn_ultimate"></a>
 
-### Ziegler-Nichols tuning from the ultimate gain and period — `ctrl_zn_ultimate`
+### Ziegler-Nichols tuning from the ultimate gain and period, `ctrl_zn_ultimate`
 
 P, PI or PID settings from the closed-loop (ultimate-cycle) Ziegler-Nichols table: P 0.5 Ku; PI 0.45 Ku, $Ti = Pu/1.2$; PID 0.6 Ku, $Ti = Pu/2$, $Td = Pu/8.$
 
@@ -892,6 +972,10 @@ $$
 - **Method:** Ziegler-Nichols ultimate-cycle table
 - **Assumes:** $Ku > 0$; $Pu > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![Kp (proportional gain) against Ku (ultimate gain (gain at sustained oscillation)) from 5 to 15](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-zn-ultimate-curve)
+
+*Kp (proportional gain) against Ku (ultimate gain (gain at sustained oscillation)) from 5 to 15. One curve for each value of controller (controller type): PID, P, PI. Other inputs as in the worked example: Pu = 4. 31 points per curve computed by control-systems-ai999x; marked: the worked example, Ku = 10, Kp = 6.*
 
 ```python
 control_systems_ai999x.solve('ctrl_zn_ultimate', Ku=10, Pu=4, controller='PID')
@@ -920,7 +1004,7 @@ control_systems_ai999x.solve('ctrl_zn_ultimate', Ku=8, Pu=3, controller='P')
 
 <a id="ctrl_zn_reaction"></a>
 
-### Ziegler-Nichols tuning from the process reaction curve — `ctrl_zn_reaction`
+### Ziegler-Nichols tuning from the process reaction curve, `ctrl_zn_reaction`
 
 P, PI or PID settings from the open-loop (reaction-curve) Ziegler-Nichols table for a process with gain K, dead time L and time constant T.
 
@@ -947,6 +1031,10 @@ $$
 - **Assumes:** K, L, $T > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Kp (proportional gain) against K (process gain) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-zn-reaction-curve)
+
+*Kp (proportional gain) against K (process gain) from 1 to 3. One curve for each value of L (apparent dead time in seconds): 1, 0.5, 2. Other inputs as in the worked example: T = 10, controller = PID. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Kp = 6.*
+
 ```python
 control_systems_ai999x.solve('ctrl_zn_reaction', K=2, L=1, T=10, controller='PID')
 # -> Kp = 6, Ti = 2 s, Td = 0.5 s, Ki = 3, Kd = 3   (SOLVED)
@@ -968,7 +1056,7 @@ control_systems_ai999x.solve('ctrl_zn_reaction', K=2, L=1.5, T=9, controller='PI
 
 <a id="ctrl_pid_standard_to_parallel"></a>
 
-### PID: standard form to parallel gains — `ctrl_pid_standard_to_parallel`
+### PID: standard form to parallel gains, `ctrl_pid_standard_to_parallel`
 
 $Ki = Kp/Ti$ and $Kd = Kp$ Td from the standard (ideal ISA) form Kp (1 + 1/(Ti s) + Td s).
 
@@ -990,6 +1078,10 @@ $$
 - **Method:** $Ki = Kp/Ti$, $Kd = Kp$ Td
 - **Assumes:** $Ti > 0$; $Td  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![Ki (integral gain) against Ti (integral (reset) time in seconds) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pid-standard-to-parallel-curve)
+
+*Ki (integral gain) against Ti (integral (reset) time in seconds) from 1 to 3. One curve for each value of Kp (proportional gain): 4, 2, 8. Other inputs as in the worked example: Td = 0.5. 31 points per curve computed by control-systems-ai999x; marked: the worked example, Ti = 2, Ki = 2.*
 
 ```python
 control_systems_ai999x.solve('ctrl_pid_standard_to_parallel', Kp=4, Ti=2, Td=0.5)
@@ -1013,7 +1105,7 @@ control_systems_ai999x.solve('ctrl_pid_standard_to_parallel', Kp=1.2, Ti=3, Td=0
 
 <a id="ctrl_pid_parallel_to_standard"></a>
 
-### PID: parallel gains to standard form — `ctrl_pid_parallel_to_standard`
+### PID: parallel gains to standard form, `ctrl_pid_parallel_to_standard`
 
 The integral time $Ti = Kp/Ki$ and derivative time $Td = Kd/Kp$ of a parallel PID Kp + Ki/s + Kd s.
 
@@ -1035,6 +1127,10 @@ $$
 - **Method:** $Ti = Kp/Ki$, $Td = Kd/Kp$
 - **Assumes:** $Kp > 0$; $Ki > 0$; $Kd  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![Ti (integral time) against Ki (integral gain (> 0)) from 1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pid-parallel-to-standard-curve)
+
+*Ti (integral time) against Ki (integral gain (> 0)) from 1.5 to 4.5. One curve for each value of Kp (proportional gain (> 0)): 6, 3, 12. Other inputs as in the worked example: Kd = 3. 31 points per curve computed by control-systems-ai999x; marked: the worked example, Ki = 3, Ti = 2 s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_pid_parallel_to_standard', Kp=6, Ki=3, Kd=3)
@@ -1058,7 +1154,7 @@ control_systems_ai999x.solve('ctrl_pid_parallel_to_standard', Kp=2, Ki=0.5, Kd=0
 
 <a id="ctrl_series_connection"></a>
 
-### Series (cascade) connection of two transfer functions — `ctrl_series_connection`
+### Series (cascade) connection of two transfer functions, `ctrl_series_connection`
 
 The transfer function G1 G2 of two blocks in series: numerators multiplied, denominators multiplied (no cancellation).
 
@@ -1082,6 +1178,10 @@ $$
 - **Assumes:** 
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![denominator of G1 G2 (den) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 3, largest 4)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-series-connection-series)
+
+*denominator of G1 G2 (den) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 3, largest 4). Inputs: num1 = [1], den1 = [1, 1], num2 = [2], den2 = [1, 3].*
+
 ```python
 control_systems_ai999x.solve('ctrl_series_connection', num1=[1], den1=[1, 1], num2=[2], den2=[1, 3])
 # -> num = [2.0], den = [1.0, 4.0, 3.0]   (SOLVED)
@@ -1103,7 +1203,7 @@ control_systems_ai999x.solve('ctrl_series_connection', num1=[1, 2], den1=[1, 0],
 
 <a id="ctrl_parallel_connection"></a>
 
-### Parallel connection of two transfer functions — `ctrl_parallel_connection`
+### Parallel connection of two transfer functions, `ctrl_parallel_connection`
 
 The transfer function $G_{1} + G_{2}$ of two blocks in parallel: (N1 $D_{2} + N_{2}$ $D_{1})/(D_{1}$ D2).
 
@@ -1127,6 +1227,14 @@ $$
 - **Assumes:** 
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The plane vectors of the worked example as arrows from the origin: input den1 = (1, 1), den2 = (1, 3); returned by control-systems-ai999x: num = (3, 5)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-parallel-connection-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input den1 = (1, 1), den2 = (1, 3); returned by control-systems-ai999x: num = (3, 5). Other inputs: num1 = [1], num2 = [2]. Marked: the tip of each returned vector.*
+
+![denominator of G1 + G2 (den) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 3, largest 4)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-parallel-connection-series)
+
+*denominator of G1 + G2 (den) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 3, largest 4). Inputs: num1 = [1], den1 = [1, 1], num2 = [2], den2 = [1, 3].*
+
 ```python
 control_systems_ai999x.solve('ctrl_parallel_connection', num1=[1], den1=[1, 1], num2=[2], den2=[1, 3])
 # -> num = [3.0, 5.0], den = [1.0, 4.0, 3.0]   (SOLVED)
@@ -1148,7 +1256,7 @@ control_systems_ai999x.solve('ctrl_parallel_connection', num1=[1], den1=[1, 0], 
 
 <a id="ctrl_discrete_dc_gain"></a>
 
-### DC gain and final value of a discrete transfer function — `ctrl_discrete_dc_gain`
+### DC gain and final value of a discrete transfer function, `ctrl_discrete_dc_gain`
 
 G(1) = sum(num)/sum(den) of a stable discrete transfer function G(z), and the final value of its response to a step of size A.
 
@@ -1170,6 +1278,10 @@ $$
 - **Method:** G(1) after a stability check
 - **Assumes:** proper G(z); every pole inside the unit circle
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![dc_gain (DC gain G(1)) as value 2 of den (denominator coefficients in z, highest power first) moves from -1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-discrete-dc-gain-sensitivity)
+
+*dc_gain (DC gain G(1)) as value 2 of den (denominator coefficients in z, highest power first) moves from -1.25 to 1.75, the other values as given ([1, -0.5]); 26 runs of control-systems-ai999x. Other inputs: num = [0.5]. Marked: the worked example, den[2] = -0.5, dc_gain = 1.*
 
 ```python
 control_systems_ai999x.solve('ctrl_discrete_dc_gain', num=[0.5], den=[1, -0.5])
@@ -1193,7 +1305,7 @@ control_systems_ai999x.solve('ctrl_discrete_dc_gain', num=[1, 0.5], den=[1, -1.2
 
 <a id="ctrl_poles_zeros"></a>
 
-### Poles, zeros and gain of a transfer function — `ctrl_poles_zeros`
+### Poles, zeros and gain of a transfer function, `ctrl_poles_zeros`
 
 The zeros (roots of the numerator), the poles (roots of the denominator) and the zero-pole-gain constant k of G(s) = num/den.
 
@@ -1216,6 +1328,10 @@ $$
 - **Assumes:** 
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![the zeros (zeros) returned by control-systems-ai999x for the worked example (num = [1, 2], den = [1, 4, 3]), drawn in the complex plane: -2 + 0i](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-poles-zeros-complex)
+
+*the zeros (zeros) returned by control-systems-ai999x for the worked example (num = [1, 2], den = [1, 4, 3]), drawn in the complex plane: -2 + 0i.*
+
 ```python
 control_systems_ai999x.solve('ctrl_poles_zeros', num=[1, 2], den=[1, 4, 3])
 # -> zeros = [-2.0], poles = [-3.0, -1.0], gain = 1   (SOLVED)
@@ -1237,7 +1353,7 @@ control_systems_ai999x.solve('ctrl_poles_zeros', num=[5], den=[1, 2, 5])
 
 <a id="ctrl_tf_evaluate"></a>
 
-### Value of a transfer function at a complex point — `ctrl_tf_evaluate`
+### Value of a transfer function at a complex point, `ctrl_tf_evaluate`
 
 G(s0) = num(s0)/den(s0) at $s_{0} = s_re + j$ s_im: real and imaginary parts, magnitude and angle.
 
@@ -1263,6 +1379,14 @@ $$
 - **Assumes:** s0 is not a pole
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![magnitude (|G(s0)|) against s_im (imaginary part of s0) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-tf-evaluate-curve)
+
+*magnitude (|G(s0)|) against s_im (imaginary part of s0) from 0.1 to 10 on a logarithmic axis. One curve for each value of s_re (real part of s0): 0, -0.5, 0.5. Other inputs as in the worked example: num = [1], den = [1, 1]. 41 points per curve computed by control-systems-ai999x; marked: the worked example, s_im = 1, magnitude = 0.707107.*
+
+![magnitude (|G(s0)|) over s_im (imaginary part of s0) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-tf-evaluate-field)
+
+*magnitude (|G(s0)|) over s_im (imaginary part of s0) from 0.1 to 10 and s_re (real part of s0) from -1 to 1 (logarithmic horizontal axis): each of the 21 × 15 cells is one run of control-systems-ai999x, shaded by its value (light 0.0980581 to dark 10); iso-lines at magnitude = 2, 4, 6. Other inputs as in the worked example: num = [1], den = [1, 1]. Marked: the worked example, s_im = 1, s_re = 0, magnitude = 0.707107.*
+
 ```python
 control_systems_ai999x.solve('ctrl_tf_evaluate', num=[1], den=[1, 1], s_re=0, s_im=1)
 # -> G_re = 0.5, G_im = -0.5, magnitude = 0.707107, angle_deg = -45   (SOLVED)
@@ -1285,7 +1409,7 @@ control_systems_ai999x.solve('ctrl_tf_evaluate', num=[2, 1], den=[1, 3, 2], s_re
 
 <a id="ctrl_feedback_connection"></a>
 
-### Closed-loop transfer function of a feedback loop — `ctrl_feedback_connection`
+### Closed-loop transfer function of a feedback loop, `ctrl_feedback_connection`
 
 G/(1 + G H) for negative feedback (or G/(1 - G H) for positive feedback): numerator N_G D_H and denominator D_G D_H +/- N_G N_H.
 
@@ -1309,6 +1433,10 @@ $$
 - **Method:** $T = N_G$ D_H / (D_G D_H + N_G N_H)
 - **Assumes:** 
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![closed-loop denominator (den) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 10, largest 10)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-feedback-connection-series)
+
+*closed-loop denominator (den) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 10, largest 10). Inputs: num_g = [10], den_g = [1, 2, 0].*
 
 ```python
 control_systems_ai999x.solve('ctrl_feedback_connection', num_g=[10], den_g=[1, 2, 0])
@@ -1337,7 +1465,7 @@ control_systems_ai999x.solve('ctrl_feedback_connection', num_g=[1], den_g=[1, 3]
 
 <a id="ctrl_second_order_step"></a>
 
-### Step response of a standard second-order system — `ctrl_second_order_step`
+### Step response of a standard second-order system, `ctrl_second_order_step`
 
 y(t) of K wn^2/(s^2 + 2 zeta wn s + wn^2) after a unit step, for underdamped, critically damped and overdamped systems, and the remaining error K - y.
 
@@ -1360,6 +1488,10 @@ $$
 - **Method:** closed-form step response for each damping case
 - **Assumes:** $\zeta  \geq  0$; $wn > 0$; $t  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![y (output at time t) against wn (natural frequency in rad/s) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-second-order-step-curve)
+
+*y (output at time t) against wn (natural frequency in rad/s) from 0.2 to 20 on a logarithmic axis. One curve for each value of t (time in seconds): 1, 0.5, 2. Other inputs as in the worked example: zeta = 0.5. 41 points per curve computed by control-systems-ai999x; marked: the worked example, wn = 2, y = 0.849426.*
 
 ```python
 control_systems_ai999x.solve('ctrl_second_order_step', zeta=0.5, wn=2, t=1)
@@ -1389,7 +1521,7 @@ control_systems_ai999x.solve('ctrl_second_order_step', zeta=2, wn=1, t=1, K=3)
 
 <a id="ctrl_rise_time_second"></a>
 
-### Rise time of an underdamped second-order system — `ctrl_rise_time_second`
+### Rise time of an underdamped second-order system, `ctrl_rise_time_second`
 
 The $0-100$ % rise time (pi - acos zeta)/wd and the $10-90$ % rise time (found exactly by bisection on the step response).
 
@@ -1413,6 +1545,14 @@ $$
 - **Assumes:** $0 < \zeta < 1$; $wn > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Tr_10_90 (10-90 % rise time) against wn (natural frequency in rad/s) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-rise-time-second-curve)
+
+*Tr_10_90 (10-90 % rise time) against wn (natural frequency in rad/s) from 0.5 to 1.5. One curve for each value of zeta (damping ratio (0 < zeta < 1)): 0.5, 0.26, 0.74. 31 points per curve computed by control-systems-ai999x; marked: the worked example, wn = 1, Tr_10_90 = 1.63757 s.*
+
+![Tr_10_90 (10-90 % rise time) over wn (natural frequency in rad/s) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-rise-time-second-field)
+
+*Tr_10_90 (10-90 % rise time) over wn (natural frequency in rad/s) from 0.5 to 1.5 and zeta (damping ratio (0 < zeta < 1)) from 0.02 to 0.98: each of the 21 × 15 cells is one run of control-systems-ai999x, shaded by its value (light 0.690338 s to dark 6.51909 s); iso-lines at Tr_10_90 = 1, 2, 3, 4, 5 s. Marked: the worked example, wn = 1, zeta = 0.5, Tr_10_90 = 1.63757 s.*
+
 ```python
 control_systems_ai999x.solve('ctrl_rise_time_second', zeta=0.5, wn=1)
 # -> Tr_0_100 = 2.4184 s, Tr_10_90 = 1.63757 s, t10 = 0.488229 s, t90 = 2.1258 s   (SOLVED)
@@ -1435,7 +1575,7 @@ control_systems_ai999x.solve('ctrl_rise_time_second', zeta=0.7, wn=10)
 
 <a id="ctrl_final_value_theorem"></a>
 
-### Final value theorem — `ctrl_final_value_theorem`
+### Final value theorem: `ctrl_final_value_theorem`
 
 lim_{t->inf} y(t) = lim_{s->0} s Y(s) for Y(s) = num/den, after checking that s Y(s) has every pole in the open left half plane.
 
@@ -1455,6 +1595,10 @@ $$
 - **Method:** cancel factors s, then evaluate s Y(s) at $s = 0$
 - **Assumes:** at most one pole at the origin; all other poles in the open left half plane
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The worked example of Final value theorem as inputs and results: stated num = [10], den = [1, 3, 2, 0]; returned by control-systems-ai999x: final_value = 5](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-final-value-theorem-io)
+
+*The worked example of Final value theorem as inputs and results: stated num = [10], den = [1, 3, 2, 0]; returned by control-systems-ai999x: final_value = 5.*
 
 ```python
 control_systems_ai999x.solve('ctrl_final_value_theorem', num=[10], den=[1, 3, 2, 0])
@@ -1479,7 +1623,7 @@ control_systems_ai999x.solve('ctrl_final_value_theorem', num=[1, 2], den=[1, 4, 
 
 <a id="ctrl_initial_value_theorem"></a>
 
-### Initial value theorem (value and slope at t = 0+) — `ctrl_initial_value_theorem`
+### Initial value theorem (value and slope at t = 0+), `ctrl_initial_value_theorem`
 
 y(0+) = lim_{s->inf} s Y(s) and y'(0+) = lim_{s->inf} s (s Y(s) - y(0+)) for a strictly proper Y(s).
 
@@ -1500,6 +1644,10 @@ $$
 - **Method:** long division of num by den in powers of $1/s$
 - **Assumes:** Y(s) strictly proper
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The worked example of Initial value theorem (value and slope at t = 0+) as inputs and results: stated num = [2, 3], den = [1, 5, 6]; returned by control-systems-ai999x: y0 = 2, dy0 = -7](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-initial-value-theorem-io)
+
+*The worked example of Initial value theorem (value and slope at t = 0+) as inputs and results: stated num = [2, 3], den = [1, 5, 6]; returned by control-systems-ai999x: y0 = 2, dy0 = -7.*
 
 ```python
 control_systems_ai999x.solve('ctrl_initial_value_theorem', num=[2, 3], den=[1, 5, 6])
@@ -1523,7 +1671,7 @@ control_systems_ai999x.solve('ctrl_initial_value_theorem', num=[4], den=[1, 2, 4
 
 <a id="ctrl_error_constants"></a>
 
-### System type, static error constant and steady-state error — `ctrl_error_constants`
+### System type, static error constant and steady-state error, `ctrl_error_constants`
 
 For unity feedback around G(s): the system type N (poles at the origin), the static error constant lim $s^{N}$ G(s) (Kp, Kv or Ka) and the steady-state error to a step, ramp or parabola of size A.
 
@@ -1547,6 +1695,10 @@ $$
 - **Method:** ess = A/(1 + Kp) (step, type 0), A/Kv (ramp, type 1), A/Ka (parabola, type 2), 0 for a higher type
 - **Assumes:** closed loop stable; proper G(s); type at least the input's order
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![ess (steady-state error) as value 3 of den (denominator of G(s)) moves from 0 to 4, the other values as given ([1, 3, 2]); 41 runs of control-systems-ai999x](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-error-constants-sensitivity)
+
+*ess (steady-state error) as value 3 of den (denominator of G(s)) moves from 0 to 4, the other values as given ([1, 3, 2]); 41 runs of control-systems-ai999x. Other inputs: num = [10], input = step. Marked: the worked example, den[3] = 2, ess = 0.166667.*
 
 ```python
 control_systems_ai999x.solve('ctrl_error_constants', num=[10], den=[1, 3, 2], input='step')
@@ -1576,7 +1728,7 @@ control_systems_ai999x.solve('ctrl_error_constants', num=[10], den=[1, 5, 4, 0],
 
 <a id="ctrl_bode_point"></a>
 
-### Bode magnitude and phase at one frequency — `ctrl_bode_point`
+### Bode magnitude and phase at one frequency: `ctrl_bode_point`
 
 |G(jw)|, 20 log10 |G(jw)| and the phase of G(jw) (principal value) of a transfer function at the angular frequency w.
 
@@ -1600,6 +1752,10 @@ $$
 - **Assumes:** proper G(s); $w > 0$; not a pole on the imaginary axis
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![magnitude (|G(jw)|) against w (angular frequency in rad/s) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-bode-point-curve)
+
+*magnitude (|G(jw)|) against w (angular frequency in rad/s) from 0.1 to 10 on a logarithmic axis. Other inputs as in the worked example: num = [10], den = [1, 1, 0]. 41 points computed by control-systems-ai999x; marked: the worked example, w = 1, magnitude = 7.07107.*
+
 ```python
 control_systems_ai999x.solve('ctrl_bode_point', num=[10], den=[1, 1, 0], w=1)
 # -> magnitude = 7.07107, magnitude_db = 16.9897, phase_deg = -135   (SOLVED)
@@ -1622,7 +1778,7 @@ control_systems_ai999x.solve('ctrl_bode_point', num=[100], den=[1, 10, 100], w=1
 
 <a id="ctrl_second_order_freq"></a>
 
-### Frequency response of a standard second-order system — `ctrl_second_order_freq`
+### Frequency response of a standard second-order system, `ctrl_second_order_freq`
 
 Magnitude, dB gain and phase (between 0 and -180 degrees) of wn^2/(s^2 + 2 zeta wn s + wn^2) at the angular frequency w.
 
@@ -1646,6 +1802,10 @@ $$
 - **Assumes:** $\zeta  \geq  0$; $wn > 0$; $w > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![magnitude (|G(jw)|) against zeta (damping ratio) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-second-order-freq-curve)
+
+*magnitude (|G(jw)|) against zeta (damping ratio) from 0.02 to 0.98. One curve for each value of wn (natural frequency in rad/s): 10, 5, 20. Other inputs as in the worked example: w = 10. 41 points per curve computed by control-systems-ai999x; marked: the worked example, zeta = 0.5, magnitude = 1.*
+
 ```python
 control_systems_ai999x.solve('ctrl_second_order_freq', zeta=0.5, wn=10, w=10)
 # -> magnitude = 1, magnitude_db = 0, phase_deg = -90   (SOLVED)
@@ -1668,7 +1828,7 @@ control_systems_ai999x.solve('ctrl_second_order_freq', zeta=0.1, wn=1, w=1)
 
 <a id="ctrl_bandwidth_second"></a>
 
-### Bandwidth of a standard second-order system — `ctrl_bandwidth_second`
+### Bandwidth of a standard second-order system, `ctrl_bandwidth_second`
 
 The -3 dB bandwidth wn sqrt($1 - 2$ $\zeta^{2} + sqrt$(4 $\zeta^{4} - 4$ zeta^2 + 2)) of wn^2/(s^2 + 2 zeta wn s + wn^2).
 
@@ -1688,6 +1848,14 @@ $$
 - **Method:** solve |G(jw)| = $1/sqrt$(2)
 - **Assumes:** $\zeta > 0$; $wn > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![wb (-3 dB bandwidth) against wn (natural frequency in rad/s) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-bandwidth-second-curve)
+
+*wb (-3 dB bandwidth) against wn (natural frequency in rad/s) from 0.5 to 1.5. One curve for each value of zeta (damping ratio (> 0)): 0.707107, 0.26, 0.74. 31 points per curve computed by control-systems-ai999x; marked: the worked example, wn = 1, wb = 1 rad/s.*
+
+![wb (-3 dB bandwidth) over wn (natural frequency in rad/s) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-bandwidth-second-field)
+
+*wb (-3 dB bandwidth) over wn (natural frequency in rad/s) from 0.5 to 1.5 and zeta (damping ratio (> 0)) from 0.02 to 0.98: each of the 21 × 15 cells is one run of control-systems-ai999x, shaded by its value (light 0.331121 rad/s to dark 2.33 rad/s); iso-lines at wb = 0.5, 1, 1.5, 2 rad/s. Marked: the worked example, wn = 1, zeta = 0.707107, wb = 1 rad/s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_bandwidth_second', zeta=0.7071067811865476, wn=1)
@@ -1711,7 +1879,7 @@ control_systems_ai999x.solve('ctrl_bandwidth_second', zeta=0.5, wn=10)
 
 <a id="ctrl_resonant_peak"></a>
 
-### Resonant peak and resonant frequency — `ctrl_resonant_peak`
+### Resonant peak and resonant frequency: `ctrl_resonant_peak`
 
 Peak magnitude Mr = 1/(2 zeta sqrt(1 - zeta^2)) and resonant frequency $wr = wn$ sqrt($1 - 2$ zeta^2) of a standard second-order system.
 
@@ -1733,6 +1901,10 @@ $$
 - **Method:** maximum of |G(jw)|
 - **Assumes:** $0 < \zeta < 1/sqrt$(2)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![Mr (resonant peak (ratio)) against zeta (damping ratio (0 < zeta < 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-resonant-peak-curve)
+
+*Mr (resonant peak (ratio)) against zeta (damping ratio (0 < zeta < 0.7071)) from 0.02 to 0.98. Other inputs as in the worked example: wn = 10. 29 points computed by control-systems-ai999x; marked: the worked example, zeta = 0.5, Mr = 1.1547.*
 
 ```python
 control_systems_ai999x.solve('ctrl_resonant_peak', zeta=0.5, wn=10)
@@ -1756,7 +1928,7 @@ control_systems_ai999x.solve('ctrl_resonant_peak', zeta=0.1, wn=1)
 
 <a id="ctrl_routh_hurwitz"></a>
 
-### Routh-Hurwitz stability test — `ctrl_routh_hurwitz`
+### Routh-Hurwitz stability test: `ctrl_routh_hurwitz`
 
 The first column of the Routh array (exact arithmetic), the number of right-half-plane roots (its sign changes) and whether the characteristic polynomial is stable.
 
@@ -1777,6 +1949,10 @@ $$
 - **Method:** Routh array in exact fractions; sign changes of the first column
 - **Assumes:** no zero in the first column (special cases are refused)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![first column of the Routh array (first_column) returned by control-systems-ai999x for the worked example, one value for each position in the list (4 values, first 1, last 6, largest 10)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-routh-hurwitz-series)
+
+*first column of the Routh array (first_column) returned by control-systems-ai999x for the worked example, one value for each position in the list (4 values, first 1, last 6, largest 10). Inputs: coefficients = [1, 6, 11, 6].*
 
 ```python
 control_systems_ai999x.solve('ctrl_routh_hurwitz', coefficients=[1, 6, 11, 6])
@@ -1806,7 +1982,7 @@ control_systems_ai999x.solve('ctrl_routh_hurwitz', coefficients=[1, 1, 2, 24])
 
 <a id="ctrl_locus_asymptotes"></a>
 
-### Root-locus asymptotes (centroid and angles) — `ctrl_locus_asymptotes`
+### Root-locus asymptotes (centroid and angles), `ctrl_locus_asymptotes`
 
 Number of asymptotes n - m, their real-axis intercept (sum of poles - sum of zeros)/(n - m) and their angles $(2k+1)$ $180/(n - m)$ degrees.
 
@@ -1828,6 +2004,10 @@ $$
 - **Method:** sums of poles and zeros from the coefficients
 - **Assumes:** more poles than zeros
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![asymptote angles in degrees (angles_deg) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 60, last 300, largest 300)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-locus-asymptotes-series)
+
+*asymptote angles in degrees (angles_deg) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 60, last 300, largest 300). Inputs: num = [1], den = [1, 3, 2, 0].*
 
 ```python
 control_systems_ai999x.solve('ctrl_locus_asymptotes', num=[1], den=[1, 3, 2, 0])
@@ -1851,7 +2031,7 @@ control_systems_ai999x.solve('ctrl_locus_asymptotes', num=[1, 3], den=[1, 6, 8, 
 
 <a id="ctrl_locus_gain_at_point"></a>
 
-### Root-locus gain and angle at a test point — `ctrl_locus_gain_at_point`
+### Root-locus gain and angle at a test point: `ctrl_locus_gain_at_point`
 
 The gain $K = 1$/|G(s0)| that would place a closed-loop pole at s0 (magnitude criterion) and the angle of G(s0); s0 lies on the root locus for $K > 0$ when the angle is 180 degrees (angle error 0).
 
@@ -1876,6 +2056,14 @@ $$
 - **Assumes:** s0 neither a pole nor a zero
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![K (gain from the magnitude criterion) against s_re (real part of the test point) from -1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-locus-gain-at-point-curve)
+
+*K (gain from the magnitude criterion) against s_re (real part of the test point) from -1.5 to -0.5. One curve for each value of s_im (imaginary part of the test point): 1, 0.5, 2. Other inputs as in the worked example: num = [1], den = [1, 2, 0]. 31 points per curve computed by control-systems-ai999x; marked: the worked example, s_re = -1, K = 2.*
+
+![K (gain from the magnitude criterion) over s_im (imaginary part of the test point) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-locus-gain-at-point-field)
+
+*K (gain from the magnitude criterion) over s_im (imaginary part of the test point) from 0.1 to 10 and s_re (real part of the test point) from -1.5 to -0.5 (logarithmic horizontal axis): each of the 21 × 15 cells is one run of control-systems-ai999x, shaded by its value (light 0.766551 to dark 101.245); iso-lines at K = 20, 40, 60, 80, 100. Other inputs as in the worked example: num = [1], den = [1, 2, 0]. Marked: the worked example, s_im = 1, s_re = -1, K = 2.*
+
 ```python
 control_systems_ai999x.solve('ctrl_locus_gain_at_point', num=[1], den=[1, 2, 0], s_re=-1, s_im=1)
 # -> K = 2, angle_deg = 180, angle_error_deg = 0   (SOLVED)
@@ -1897,7 +2085,7 @@ control_systems_ai999x.solve('ctrl_locus_gain_at_point', num=[1], den=[1, 3, 2, 
 
 <a id="ctrl_ss_to_tf"></a>
 
-### Transfer function of a state-space model — `ctrl_ss_to_tf`
+### Transfer function of a state-space model: `ctrl_ss_to_tf`
 
 G(s) = C (sI - A)^{-1} B + D of a single-input single-output state-space model, computed exactly (Faddeev-LeVerrier).
 
@@ -1921,6 +2109,14 @@ $$
 - **Assumes:** A square, at most 6 x 6
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![numerator (n+1 coefficients, highest power first) (num) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 0, last 1, largest 1); with den (characteristic polynomial (monic))](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ss-to-tf-series)
+
+*numerator (n+1 coefficients, highest power first) (num) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 0, last 1, largest 1); with den (characteristic polynomial (monic)). Inputs: A = [[0, 1], [-2, -3]], B = [0, 1], C = [1, 0].*
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ss-to-tf-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input). Other inputs: B = [0, 1], C = [1, 0].*
+
 ```python
 control_systems_ai999x.solve('ctrl_ss_to_tf', A=[[0, 1], [-2, -3]], B=[0, 1], C=[1, 0])
 # -> num = [0.0, 0.0, 1.0], den = [1.0, 3.0, 2.0]   (SOLVED)
@@ -1943,7 +2139,7 @@ control_systems_ai999x.solve('ctrl_ss_to_tf', A=[[0, 1], [-6, -5]], B=[0, 1], C=
 
 <a id="ctrl_tf_to_ss"></a>
 
-### Controllable canonical form of a transfer function — `ctrl_tf_to_ss`
+### Controllable canonical form of a transfer function, `ctrl_tf_to_ss`
 
 A, B, C, D in the controllable canonical form (scipy's convention) of a proper transfer function.
 
@@ -1967,6 +2163,14 @@ $$
 - **Assumes:** proper G(s)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![input vector (B) at each output vector (C), both returned by control-systems-ai999x for the worked example (num = [1], den = [1, 3, 2]): 0 → 1; 1 → 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-tf-to-ss-series)
+
+*input vector (B) at each output vector (C), both returned by control-systems-ai999x for the worked example (num = [1], den = [1, 3, 2]): 0 → 1; 1 → 0.*
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-tf-to-ss-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (returned). Returned with them by control-systems-ai999x: D = 0. Other inputs: num = [1], den = [1, 3, 2].*
+
 ```python
 control_systems_ai999x.solve('ctrl_tf_to_ss', num=[1], den=[1, 3, 2])
 # -> A = [[-3.0, -2.0], [1.0, 0.0]], B = [1.0, 0.0], C = [0.0, 1.0], D = 0   (SOLVED)
@@ -1989,7 +2193,7 @@ control_systems_ai999x.solve('ctrl_tf_to_ss', num=[2, 1, 4], den=[2, 6, 4])
 
 <a id="ctrl_ss_eigenvalues"></a>
 
-### Eigenvalues (poles) of a state matrix — `ctrl_ss_eigenvalues`
+### Eigenvalues (poles) of a state matrix: `ctrl_ss_eigenvalues`
 
 The characteristic polynomial det(sI - A) (exact), the eigenvalues of A and whether the system is asymptotically stable.
 
@@ -2011,6 +2215,14 @@ $$
 - **Method:** Faddeev-LeVerrier, then polynomial roots
 - **Assumes:** A square, at most 6 x 6
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![eigenvalues of A (eigenvalues) returned by control-systems-ai999x for the worked example (A = [[0, 1], [-2, -3]]), drawn in the complex plane: -2 + 0i, -1 + 0i](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ss-eigenvalues-complex)
+
+*eigenvalues of A (eigenvalues) returned by control-systems-ai999x for the worked example (A = [[0, 1], [-2, -3]]), drawn in the complex plane: -2 + 0i, -1 + 0i.*
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); eigenvalues (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ss-eigenvalues-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); eigenvalues (returned). Returned with them by control-systems-ai999x: max_real_part = -1.*
 
 ```python
 control_systems_ai999x.solve('ctrl_ss_eigenvalues', A=[[0, 1], [-2, -3]])
@@ -2034,7 +2246,7 @@ control_systems_ai999x.solve('ctrl_ss_eigenvalues', A=[[0, 1], [-5, -2]])
 
 <a id="ctrl_controllability"></a>
 
-### Controllability matrix and rank — `ctrl_controllability`
+### Controllability matrix and rank: `ctrl_controllability`
 
 The controllability matrix [B, AB, ..., A^{$n-1$}B], its exact rank and determinant, and whether (A, B) is controllable.
 
@@ -2058,6 +2270,10 @@ $$
 - **Assumes:** single input
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Wc (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-controllability-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Wc (returned). Returned with them by control-systems-ai999x: rank = 2, det_Wc = -1. Other inputs: B = [0, 1].*
+
 ```python
 control_systems_ai999x.solve('ctrl_controllability', A=[[0, 1], [-2, -3]], B=[0, 1])
 # -> Wc = [[0.0, 1.0], [1.0, -3.0]], rank = 2, controllable = True, det_Wc = -1   (SOLVED)
@@ -2079,7 +2295,7 @@ control_systems_ai999x.solve('ctrl_controllability', A=[[-1, 0], [0, -2]], B=[1,
 
 <a id="ctrl_observability"></a>
 
-### Observability matrix and rank — `ctrl_observability`
+### Observability matrix and rank: `ctrl_observability`
 
 The observability matrix [C; CA; ...; CA^{$n-1$}], its exact rank and determinant, and whether (A, C) is observable.
 
@@ -2103,6 +2319,10 @@ $$
 - **Assumes:** single output
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Wo (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-observability-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Wo (returned). Returned with them by control-systems-ai999x: rank = 2, det_Wo = 1. Other inputs: C = [1, 0].*
+
 ```python
 control_systems_ai999x.solve('ctrl_observability', A=[[0, 1], [-2, -3]], C=[1, 0])
 # -> Wo = [[1.0, 0.0], [0.0, 1.0]], rank = 2, observable = True, det_Wo = 1   (SOLVED)
@@ -2124,7 +2344,7 @@ control_systems_ai999x.solve('ctrl_observability', A=[[-1, 0], [0, -2]], C=[1, 0
 
 <a id="ctrl_ss_dc_gain"></a>
 
-### DC gain of a state-space model — `ctrl_ss_dc_gain`
+### DC gain of a state-space model: `ctrl_ss_dc_gain`
 
 The steady-state gain G(0) = D - C A^{-1} B of a state-space model (exact).
 
@@ -2146,6 +2366,10 @@ $$
 - **Method:** solve A $x = B$ exactly, then D - C x
 - **Assumes:** A nonsingular
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ss-dc-gain-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input). Returned with them by control-systems-ai999x: dc_gain = 0.5. Other inputs: B = [0, 1], C = [1, 0].*
 
 ```python
 control_systems_ai999x.solve('ctrl_ss_dc_gain', A=[[0, 1], [-2, -3]], B=[0, 1], C=[1, 0])
@@ -2169,7 +2393,7 @@ control_systems_ai999x.solve('ctrl_ss_dc_gain', A=[[-1, 0], [0, -4]], B=[1, 2], 
 
 <a id="ctrl_zoh_first_order"></a>
 
-### Zero-order-hold discretization of a first-order system — `ctrl_zoh_first_order`
+### Zero-order-hold discretization of a first-order system, `ctrl_zoh_first_order`
 
 G(z) = b/(z - a) with $a = e$^{-T/tau} and $b = K$ $(1 - a)$: the exact step-invariant (ZOH) equivalent of K/(tau s + 1) sampled every T seconds.
 
@@ -2191,6 +2415,10 @@ $$
 - **Method:** $a = e^{\frac{-T}{\tau}}$, $b = K$ $(1 - a)$
 - **Assumes:** $\tau > 0$; $T > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![a (discrete pole a) against tau (time constant in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-zoh-first-order-curve)
+
+*a (discrete pole a) against tau (time constant in seconds) from 0.1 to 10 on a logarithmic axis. One curve for each value of T (sampling period in seconds): 0.5, 0.25, 1. Other inputs as in the worked example: K = 2. 41 points per curve computed by control-systems-ai999x; marked: the worked example, tau = 1, a = 0.606531.*
 
 ```python
 control_systems_ai999x.solve('ctrl_zoh_first_order', K=2, tau=1, T=0.5)
@@ -2214,7 +2442,7 @@ control_systems_ai999x.solve('ctrl_zoh_first_order', K=1, tau=10, T=1)
 
 <a id="ctrl_tustin"></a>
 
-### Tustin (bilinear) discretization — `ctrl_tustin`
+### Tustin (bilinear) discretization: `ctrl_tustin`
 
 The discrete transfer function obtained by substituting $s = (2/T)$$(z - 1)/(z + 1)$ into G(s).
 
@@ -2236,6 +2464,10 @@ $$
 - **Method:** polynomial substitution, multiplied through by $(z + 1)^{n}$
 - **Assumes:** proper G(s); $T > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-tustin-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0.047619, 0.047619), denz = (1, -0.904762). Other inputs: num = [1], T = 0.1. Marked: the tip of each returned vector.*
 
 ```python
 control_systems_ai999x.solve('ctrl_tustin', num=[1], den=[1, 1], T=0.1)
@@ -2259,7 +2491,7 @@ control_systems_ai999x.solve('ctrl_tustin', num=[1], den=[1, 0], T=2)
 
 <a id="ctrl_forward_euler"></a>
 
-### Forward Euler (forward difference) discretization — `ctrl_forward_euler`
+### Forward Euler (forward difference) discretization, `ctrl_forward_euler`
 
 The discrete transfer function obtained by substituting $s = (z - 1)/T$ into G(s).
 
@@ -2281,6 +2513,14 @@ $$
 - **Method:** polynomial substitution $s = (z - 1)/T$
 - **Assumes:** proper G(s); $T > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0, 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-forward-euler-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0, 0.1), denz = (1, -0.9). Other inputs: num = [1], T = 0.1. Marked: the tip of each returned vector.*
+
+![denominator in z (leading coefficient 1) (denz) at each numerator in z (padded, normalised) (numz), both returned by control-systems-ai999x for the worked example (num = [1], den = [1, 1], T = 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-forward-euler-series)
+
+*denominator in z (leading coefficient 1) (denz) at each numerator in z (padded, normalised) (numz), both returned by control-systems-ai999x for the worked example (num = [1], den = [1, 1], T = 0.1): 0 → 1; 0.1 → -0.9.*
 
 ```python
 control_systems_ai999x.solve('ctrl_forward_euler', num=[1], den=[1, 1], T=0.1)
@@ -2304,7 +2544,7 @@ control_systems_ai999x.solve('ctrl_forward_euler', num=[2], den=[1, 3, 2], T=0.5
 
 <a id="ctrl_backward_euler"></a>
 
-### Backward Euler (backward difference) discretization — `ctrl_backward_euler`
+### Backward Euler (backward difference) discretization, `ctrl_backward_euler`
 
 The discrete transfer function obtained by substituting s = (z - 1)/(T z) into G(s).
 
@@ -2326,6 +2566,10 @@ $$
 - **Method:** polynomial substitution s = (z - 1)/(T z)
 - **Assumes:** proper G(s); $T > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-backward-euler-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0.0909091, 0), denz = (1, -0.909091). Other inputs: num = [1], T = 0.1. Marked: the tip of each returned vector.*
 
 ```python
 control_systems_ai999x.solve('ctrl_backward_euler', num=[1], den=[1, 1], T=0.1)
@@ -2349,7 +2593,7 @@ control_systems_ai999x.solve('ctrl_backward_euler', num=[1], den=[1, 0], T=0.5)
 
 <a id="ctrl_discrete_step"></a>
 
-### Step response of a discrete transfer function at sample k — `ctrl_discrete_step`
+### Step response of a discrete transfer function at sample k, `ctrl_discrete_step`
 
 y[k] of G(z) = numz/denz after a step of size A applied at $k = 0$, by the difference equation.
 
@@ -2371,6 +2615,10 @@ $$
 - **Method:** recursion y[j] = sum b_i u[j-i] - sum a_i y[j-i]
 - **Assumes:** proper (causal) G(z); $0  \leq  k  \leq  500$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![y (output at sample k) against k (sample index (0 to 500)) from 1 to 10](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-discrete-step-curve)
+
+*y (output at sample k) against k (sample index (0 to 500)) from 1 to 10. Other inputs as in the worked example: numz = [0.5], denz = [1, -0.5]. 10 points computed by control-systems-ai999x; marked: the worked example, k = 2, y = 0.75.*
 
 ```python
 control_systems_ai999x.solve('ctrl_discrete_step', numz=[0.5], denz=[1, -0.5], k=2)
@@ -2394,7 +2642,7 @@ control_systems_ai999x.solve('ctrl_discrete_step', numz=[1, 0], denz=[1, -0.5], 
 
 <a id="ctrl_discrete_pid"></a>
 
-### Discrete PID in velocity (incremental) form — `ctrl_discrete_pid`
+### Discrete PID in velocity (incremental) form, `ctrl_discrete_pid`
 
 Coefficients of u[k] = u[$k-1$] + q0 e[k] + q1 e[$k-1$] + q2 e[$k-2$] for a PID with backward-difference integral and derivative: $q_{0} = Kp + Ki$ T + Kd/T, $q_{1} = -Kp - 2$ Kd/T, $q_{2} = Kd/T.$
 
@@ -2419,6 +2667,10 @@ $$
 - **Assumes:** $T > 0$; Ki, $Kd  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![q0 (coefficient of e[k]) against T (sampling period in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-discrete-pid-curve)
+
+*q0 (coefficient of e[k]) against T (sampling period in seconds) from 0.01 to 1 on a logarithmic axis. One curve for each value of Kd (derivative gain): 0.5, 0.25, 1. Other inputs as in the worked example: Kp = 2, Ki = 1. 41 points per curve computed by control-systems-ai999x; marked: the worked example, T = 0.1, q0 = 7.1.*
+
 ```python
 control_systems_ai999x.solve('ctrl_discrete_pid', Kp=2, Ki=1, Kd=0.5, T=0.1)
 # -> q0 = 7.1, q1 = -12, q2 = 5   (SOLVED)
@@ -2441,7 +2693,7 @@ control_systems_ai999x.solve('ctrl_discrete_pid', Kp=1, Ki=4, Kd=0, T=0.25)
 
 <a id="ctrl_z_to_s_pole"></a>
 
-### Continuous equivalent of a discrete pole (s = ln z / T) — `ctrl_z_to_s_pole`
+### Continuous equivalent of a discrete pole (s = ln z / T), `ctrl_z_to_s_pole`
 
 The s-plane pole $s = ln$(z)/T (principal branch) of a discrete pole $z = z_re + j$ z_im, with its natural frequency and damping ratio.
 
@@ -2466,6 +2718,10 @@ $$
 - **Assumes:** $T > 0$; z not on the negative real axis
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![wn (natural frequency) against z_re (real part of the discrete pole) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-z-to-s-pole-curve)
+
+*wn (natural frequency) against z_re (real part of the discrete pole) from 0.05 to 5 on a logarithmic axis. One curve for each value of T (sampling period in seconds): 0.1, 0.05, 0.2. Other inputs as in the worked example: z_im = 0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, z_re = 0.5, wn = 6.93147 rad/s.*
+
 ```python
 control_systems_ai999x.solve('ctrl_z_to_s_pole', z_re=0.5, z_im=0, T=0.1)
 # -> s_re = -6.93147, s_im = 0, wn = 6.93147 rad/s, zeta = 1   (SOLVED)
@@ -2488,7 +2744,7 @@ control_systems_ai999x.solve('ctrl_z_to_s_pole', z_re=0, z_im=0.5, T=1)
 
 <a id="ctrl_cohen_coon"></a>
 
-### Cohen-Coon tuning of a first-order-plus-dead-time process — `ctrl_cohen_coon`
+### Cohen-Coon tuning of a first-order-plus-dead-time process, `ctrl_cohen_coon`
 
 P, PI or PID settings from the Cohen-Coon formulas for K e^{-theta s}/(tau s + 1).
 
@@ -2515,6 +2771,10 @@ $$
 - **Assumes:** K, tau, $\theta > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Kp (proportional gain) against K (process gain) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-cohen-coon-curve)
+
+*Kp (proportional gain) against K (process gain) from 1 to 3. One curve for each value of tau (time constant in seconds): 10, 5, 20. Other inputs as in the worked example: theta = 2, controller = PID. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Kp = 3.45833.*
+
 ```python
 control_systems_ai999x.solve('ctrl_cohen_coon', K=2, tau=10, theta=2, controller='PID')
 # -> Kp = 3.45833, Ti = 4.54795 s, Td = 0.701754 s, Ki = 0.760417, Kd = 2.4269   (SOLVED)
@@ -2537,7 +2797,7 @@ control_systems_ai999x.solve('ctrl_cohen_coon', K=1, tau=5, theta=1, controller=
 
 <a id="ctrl_simc_pi"></a>
 
-### SIMC (Skogestad) PI tuning — `ctrl_simc_pi`
+### SIMC (Skogestad) PI tuning: `ctrl_simc_pi`
 
 PI settings Kp = tau/(K (tau_c + theta)), Ti = min(tau, 4 (tau_c + theta)) for K e^{-theta s}/(tau s + 1); the default tau_c equals theta.
 
@@ -2562,6 +2822,10 @@ $$
 - **Assumes:** K, tau, $\theta > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Kp (proportional gain) against K (process gain) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-simc-pi-curve)
+
+*Kp (proportional gain) against K (process gain) from 1 to 3. One curve for each value of tau (time constant in seconds): 10, 5, 20. Other inputs as in the worked example: theta = 1. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Kp = 2.5.*
+
 ```python
 control_systems_ai999x.solve('ctrl_simc_pi', K=2, tau=10, theta=1)
 # -> Kp = 2.5, Ti = 8 s, Ki = 0.3125   (SOLVED)
@@ -2584,7 +2848,7 @@ control_systems_ai999x.solve('ctrl_simc_pi', K=1, tau=4, theta=0.5, tau_c=2)
 
 <a id="ctrl_pid_closed_loop"></a>
 
-### Closed-loop poles of a PID loop — `ctrl_pid_closed_loop`
+### Closed-loop poles of a PID loop: `ctrl_pid_closed_loop`
 
 The characteristic polynomial s D(s) + (Kd $s^{2} + Kp$ s + Ki) N(s), the closed-loop poles and stability of a plant N/D under a PID controller with unity feedback.
 
@@ -2611,6 +2875,14 @@ $$
 - **Assumes:** strictly proper plant
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: poles = (-3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pid-closed-loop-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: poles = (-3.41421, -0.585786); also returned max_real_part = -0.585786. Other inputs: num = [1], Kp = 3, Ki = 2. Marked: the tip of each returned vector.*
+
+![closed-loop poles (poles) returned by control-systems-ai999x for the worked example (num = [1], den = [1, 1], Kp = 3, Ki = 2), drawn in the complex plane: -3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pid-closed-loop-complex)
+
+*closed-loop poles (poles) returned by control-systems-ai999x for the worked example (num = [1], den = [1, 1], Kp = 3, Ki = 2), drawn in the complex plane: -3.41421 + 0i, -0.585786 + 0i.*
+
 ```python
 control_systems_ai999x.solve('ctrl_pid_closed_loop', num=[1], den=[1, 1], Kp=3, Ki=2)
 # -> char_poly = [1.0, 4.0, 2.0], poles = [-3.41421356237, -0.585786437627], max_real_part = -0.585786, stable = True   (SOLVED)
@@ -2633,7 +2905,7 @@ control_systems_ai999x.solve('ctrl_pid_closed_loop', num=[1], den=[1, 3, 2], Kp=
 
 <a id="ctrl_lead_max_phase"></a>
 
-### Maximum phase lead of a lead compensator — `ctrl_lead_max_phase`
+### Maximum phase lead of a lead compensator: `ctrl_lead_max_phase`
 
 For C(s) = (s + z)/(s + p) with $z < p$: the maximum phase lead asin((p - z)/(p + z)), the frequency sqrt(z p) where it occurs, $\alpha = z/p$ and the gain there, 10 log10(z/p) dB.
 
@@ -2657,6 +2929,14 @@ $$
 - **Assumes:** $0 < z < p$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![phi_max_deg (maximum phase lead in degrees) against z (zero corner frequency (rad/s)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lead-max-phase-curve)
+
+*phi_max_deg (maximum phase lead in degrees) against z (zero corner frequency (rad/s)) from 0.1 to 10 on a logarithmic axis. One curve for each value of p (pole corner frequency (rad/s), p > z): 9, 4.5, 18. 40 points per curve computed by control-systems-ai999x; marked: the worked example, z = 1, phi_max_deg = 53.1301.*
+
+![phi_max_deg (maximum phase lead in degrees) over z (zero corner frequency (rad/s)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lead-max-phase-field)
+
+*phi_max_deg (maximum phase lead in degrees) over z (zero corner frequency (rad/s)) from 0.1 to 10 and p (pole corner frequency (rad/s), p > z) from 0.9 to 90 (logarithmic axes): each of the 21 × 15 cells is one run of control-systems-ai999x, shaded by its value (light 0.751005 to dark 86.1817); iso-lines at phi_max_deg = 20, 40, 60, 80; blank cells: inputs the capability refuses. Marked: the worked example, z = 1, p = 9, phi_max_deg = 53.1301.*
+
 ```python
 control_systems_ai999x.solve('ctrl_lead_max_phase', z=1, p=9)
 # -> phi_max_deg = 53.1301, w_max = 3 rad/s, alpha = 0.111111, magnitude_db = -9.54243   (SOLVED)
@@ -2679,7 +2959,7 @@ control_systems_ai999x.solve('ctrl_lead_max_phase', z=2, p=8)
 
 <a id="ctrl_specs_to_poles"></a>
 
-### Desired closed-loop poles from overshoot and settling time — `ctrl_specs_to_poles`
+### Desired closed-loop poles from overshoot and settling time, `ctrl_specs_to_poles`
 
 zeta from the overshoot, $\sigma = 4/Ts$ from the 2 % settling time, $wn = \sigma/\zeta$, the poles -sigma +/- j wd and the desired characteristic polynomial.
 
@@ -2704,6 +2984,18 @@ $$
 - **Assumes:** $0 < OS < 100$ %; $Ts > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![wn (natural frequency) against OS (maximum overshoot (write 10% or 0](https://huggingface.co/AI999X/control-systems-ai999x/resolve/main/figures/ctrl-specs-to-poles-wn-vs-os.svg)
+
+*wn (natural frequency) against OS (maximum overshoot (write 10% or 0.1)), with Ts = 2. 31 points computed by control-systems-ai999x; marked: OS = 0.163034, wn = 4 rad/s.*
+
+![s^2 + 2 sigma s + wn^2 (char_poly) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 16, largest 16)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-specs-to-poles-series)
+
+*s^2 + 2 sigma s + wn^2 (char_poly) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 16, largest 16). Inputs: OS = 0.163033534821, Ts = 2.*
+
+![wn (natural frequency) against OS (maximum overshoot (write 10% or 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-specs-to-poles-curve)
+
+*wn (natural frequency) against OS (maximum overshoot (write 10% or 0.1)) from 0.0163034 to 1.63034 on a logarithmic axis. One curve for each value of Ts (2 % settling time in seconds): 2, 1, 4. 36 points per curve computed by control-systems-ai999x; marked: the worked example, OS = 0.163034, wn = 4 rad/s.*
+
 ```python
 control_systems_ai999x.solve('ctrl_specs_to_poles', OS=0.163033534821, Ts=2)
 # -> zeta = 0.5, wn = 4 rad/s, sigma = 2, wd = 3.4641 rad/s, char_poly = [1.0, 4.0, 16.0]   (SOLVED)
@@ -2726,7 +3018,7 @@ control_systems_ai999x.solve('ctrl_specs_to_poles', OS=0.1, Ts=1)
 
 <a id="ctrl_log_decrement"></a>
 
-### Damping ratio from the logarithmic decrement — `ctrl_log_decrement`
+### Damping ratio from the logarithmic decrement, `ctrl_log_decrement`
 
 $\delta = ln$(x1/xn)/n from two peak amplitudes n cycles apart, and $\zeta = \delta/sqrt$(4 pi^2 + delta^2).
 
@@ -2748,6 +3040,10 @@ $$
 - **Method:** ratio of successive peaks
 - **Assumes:** $0 < xn < x_{1}$; $n  \geq  1$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![zeta (damping ratio) against n (number of cycles between the peaks) from 1 to 9](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-log-decrement-curve)
+
+*zeta (damping ratio) against n (number of cycles between the peaks) from 1 to 9. One curve for each value of x1 (first peak amplitude (measured from the final value)): 1, 2. Other inputs as in the worked example: xn = 0.5. 9 points per curve computed by control-systems-ai999x; marked: the worked example, n = 1, zeta = 0.109653.*
 
 ```python
 control_systems_ai999x.solve('ctrl_log_decrement', x1=1, xn=0.5, n=1)
@@ -2771,7 +3067,7 @@ control_systems_ai999x.solve('ctrl_log_decrement', x1=4, xn=1, n=3)
 
 <a id="ctrl_identify_second_order"></a>
 
-### Second-order model from a step response — `ctrl_identify_second_order`
+### Second-order model from a step response: `ctrl_identify_second_order`
 
 Gain K = y_final/A, percent overshoot, zeta and wn of a standard second-order model from the peak value, the final value and the peak time of a measured step response.
 
@@ -2797,6 +3093,10 @@ $$
 - **Assumes:** 0 < overshoot < 100 %; t_peak > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![wn (natural frequency) against y_peak (peak value of the response) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-identify-second-order-curve)
+
+*wn (natural frequency) against y_peak (peak value of the response) from 0.581517 to 1.74455. One curve for each value of t_peak (time of the peak in seconds): 0.9069, 0.45345, 1.8138. Other inputs as in the worked example: y_final = 1. 20 points per curve computed by control-systems-ai999x; marked: the worked example, y_peak = 1.16303, wn = 4 rad/s.*
+
 ```python
 control_systems_ai999x.solve('ctrl_identify_second_order', y_peak=1.163033534821, y_final=1, t_peak=0.906899682118)
 # -> K = 1, PO = 16.3034, zeta = 0.5, wn = 4 rad/s   (SOLVED)
@@ -2819,7 +3119,7 @@ control_systems_ai999x.solve('ctrl_identify_second_order', y_peak=12.5, y_final=
 
 <a id="ctrl_fopdt_step"></a>
 
-### Step response of a first-order-plus-dead-time process — `ctrl_fopdt_step`
+### Step response of a first-order-plus-dead-time process, `ctrl_fopdt_step`
 
 y(t) of K e^{-theta s}/(tau s + 1) after a step of size A: 0 before the dead time, K A (1 - e^{-(t - theta)/tau}) after it.
 
@@ -2843,6 +3143,10 @@ $$
 - **Assumes:** $\tau > 0$; $\theta  \geq  0$; $t  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![y (output at time t) against theta (dead time in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-fopdt-step-curve)
+
+*y (output at time t) against theta (dead time in seconds) from 0.1 to 10 on a logarithmic axis. One curve for each value of K (process gain): 2, 1, 4. Other inputs as in the worked example: tau = 5, t = 6. 41 points per curve computed by control-systems-ai999x; marked: the worked example, theta = 1, y = 1.26424.*
+
 ```python
 control_systems_ai999x.solve('ctrl_fopdt_step', K=2, tau=5, theta=1, t=6)
 # -> y = 1.26424   (SOLVED)
@@ -2865,7 +3169,7 @@ control_systems_ai999x.solve('ctrl_fopdt_step', K=2, tau=5, theta=1, t=0.5)
 
 <a id="ctrl_kalman_scalar_step"></a>
 
-### One step of a scalar Kalman filter — `ctrl_kalman_scalar_step`
+### One step of a scalar Kalman filter: `ctrl_kalman_scalar_step`
 
 Predict (x- = a x, P- = $a^{2}$ P + q) and update with a measurement z of variance r (gain P-/(P- + r)) for $x_k = a$ x_{$k-1$} + w, $z_k = x_k + v.$
 
@@ -2894,6 +3198,10 @@ $$
 - **Assumes:** P, $q  \geq  0$; $r > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![x_post (updated estimate) against a (state transition coefficient) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-kalman-scalar-step-curve)
+
+*x_post (updated estimate) against a (state transition coefficient) from 0.1 to 10 on a logarithmic axis. One curve for each value of z (new measurement): 4, 2, 8. Other inputs as in the worked example: x = 0, P = 1, q = 1, r = 2. 41 points per curve computed by control-systems-ai999x; marked: the worked example, a = 1, x_post = 2.*
+
 ```python
 control_systems_ai999x.solve('ctrl_kalman_scalar_step', x=0, P=1, a=1, q=1, r=2, z=4)
 # -> x_pred = 0, P_pred = 2, gain = 0.5, x_post = 2, P_post = 1   (SOLVED)
@@ -2916,7 +3224,7 @@ control_systems_ai999x.solve('ctrl_kalman_scalar_step', x=1, P=0.5, a=2, q=0, r=
 
 <a id="ctrl_dc_motor"></a>
 
-### Speed transfer function of a DC motor — `ctrl_dc_motor`
+### Speed transfer function of a DC motor: `ctrl_dc_motor`
 
 omega(s)/V(s) = Kt/((J s + b)(L s + R) + Kt^2) of an armature-controlled DC motor (Ke = Kt in SI units): coefficients, DC gain and poles.
 
@@ -2943,6 +3251,14 @@ $$
 - **Assumes:** J, Kt, R, $L > 0$; $b  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![poles (poles) returned by control-systems-ai999x for the worked example (J = 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-dc-motor-complex)
+
+*poles (poles) returned by control-systems-ai999x for the worked example (J = 0.01, b = 0.1, Kt = 0.01, R = 1, L = 0.5), drawn in the complex plane: -9.9975 + 0i, -2.0025 + 0i.*
+
+![dc_gain (speed per volt at steady state (rad/s per V)) against b (viscous friction in N*m*s) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-dc-motor-curve)
+
+*dc_gain (speed per volt at steady state (rad/s per V)) against b (viscous friction in N*m*s) from 0.05 to 0.15. One curve for each value of R (armature resistance in ohm): 1, 0.5, 2. Other inputs as in the worked example: J = 0.01, Kt = 0.01, L = 0.5. 31 points per curve computed by control-systems-ai999x; marked: the worked example, b = 0.1, dc_gain = 0.0999001.*
+
 ```python
 control_systems_ai999x.solve('ctrl_dc_motor', J=0.01, b=0.1, Kt=0.01, R=1, L=0.5)
 # -> num = [0.01], den = [0.005, 0.06, 0.1001], dc_gain = 0.0999001, poles = [-9.99749921826, -2.00250078174]   (SOLVED)
@@ -2965,7 +3281,7 @@ control_systems_ai999x.solve('ctrl_dc_motor', J=1, b=0, Kt=1, R=2, L=1)
 
 <a id="ctrl_stability_margins"></a>
 
-### Gain and phase margins — `ctrl_stability_margins`
+### Gain and phase margins: `ctrl_stability_margins`
 
 Gain margin 1/|L(j w_pc)| (ratio and dB) at the phase crossover and phase margin 180 + arg L(j w_gc) at the gain crossover of an open loop L(s).
 
@@ -2990,6 +3306,10 @@ $$
 - **Assumes:** exactly one gain crossover and one phase crossover
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![pm_deg (phase margin in degrees) as value 4 of den (denominator of L(s)) moves from 0 to 4](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-stability-margins-sensitivity)
+
+*pm_deg (phase margin in degrees) as value 4 of den (denominator of L(s)) moves from 0 to 4.5, the other values as given ([1, 3, 2, 0]); 41 runs of control-systems-ai999x. Other inputs: num = [10]. Marked: the worked example, den[4] = 0, pm_deg = -12.9972.*
+
 ```python
 control_systems_ai999x.solve('ctrl_stability_margins', num=[10], den=[1, 3, 2, 0])
 # -> gm = 0.6, gm_db = -4.43697, w_pc = 1.41421 rad/s, pm_deg = -12.9972, w_gc = 1.8022 rad/s   (SOLVED)
@@ -3012,7 +3332,7 @@ control_systems_ai999x.solve('ctrl_stability_margins', num=[2], den=[1, 3, 2, 0]
 
 <a id="ctrl_bandwidth"></a>
 
-### -3 dB bandwidth of a transfer function — `ctrl_bandwidth`
+### -3 dB bandwidth of a transfer function, `ctrl_bandwidth`
 
 The lowest frequency at which |G(jw)| falls to |G(0)|/sqrt(2) for a stable, strictly proper G(s), and the DC gain.
 
@@ -3033,6 +3353,10 @@ $$
 - **Method:** smallest positive root of 2|N(jw)|^$2 - G$(0)^2 |D(jw)|^2
 - **Assumes:** stable; strictly proper; nonzero DC gain
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![wb (-3 dB bandwidth) as value 2 of den (denominator) moves from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-bandwidth-sensitivity)
+
+*wb (-3 dB bandwidth) as value 2 of den (denominator) moves from 0.5 to 1.5, the other values as given ([1, 1]); 41 runs of control-systems-ai999x. Other inputs: num = [1]. Marked: the worked example, den[2] = 1, wb = 1 rad/s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_bandwidth', num=[1], den=[1, 1])
@@ -3056,7 +3380,7 @@ control_systems_ai999x.solve('ctrl_bandwidth', num=[100], den=[1, 10, 100])
 
 <a id="ctrl_stable_gain_range"></a>
 
-### Range of gain for closed-loop stability (Routh, j-omega crossing) — `ctrl_stable_gain_range`
+### Range of gain for closed-loop stability (Routh, j-omega crossing), `ctrl_stable_gain_range`
 
 The interval K_min < K < K_max of positive gains for which $1 + K$ G(s) = 0 has every root in the left half plane, and the frequency at which the root locus crosses the imaginary axis at K_max.
 
@@ -3078,6 +3402,10 @@ $$
 - **Method:** critical gains from D(jw) + K N(jw) = 0 and D(0) + K N(0) = 0; each interval tested by an exact Routh array
 - **Assumes:** one bounded interval of stable positive gains
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![K_max (critical gain (upper end)) as value 4 of den (denominator of G(s)) moves from 0 to 4](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-stable-gain-range-sensitivity)
+
+*K_max (critical gain (upper end)) as value 4 of den (denominator of G(s)) moves from 0 to 4.5, the other values as given ([1, 3, 2, 0]); 41 runs of control-systems-ai999x. Other inputs: num = [1]. Marked: the worked example, den[4] = 0, K_max = 6.*
 
 ```python
 control_systems_ai999x.solve('ctrl_stable_gain_range', num=[1], den=[1, 3, 2, 0])
@@ -3101,7 +3429,7 @@ control_systems_ai999x.solve('ctrl_stable_gain_range', num=[1], den=[1, 6, 11, 6
 
 <a id="ctrl_breakaway_points"></a>
 
-### Root-locus breakaway and break-in points — `ctrl_breakaway_points`
+### Root-locus breakaway and break-in points: `ctrl_breakaway_points`
 
 Real points where root-locus branches meet and leave (or enter) the real axis: real roots of N D' - N' $D = 0$ with a positive gain $K = -D/N$ there.
 
@@ -3124,6 +3452,10 @@ $$
 - **Assumes:** proper G(s)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The worked example of Root-locus breakaway and break-in points as inputs and results: stated num = [1], den = [1, 3, 2, 0]; returned by control-systems-ai999x: points = [-0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-breakaway-points-io)
+
+*The worked example of Root-locus breakaway and break-in points as inputs and results: stated num = [1], den = [1, 3, 2, 0]; returned by control-systems-ai999x: points = [-0.42264973081], gains = [0.38490017946], count = 1.*
+
 ```python
 control_systems_ai999x.solve('ctrl_breakaway_points', num=[1], den=[1, 3, 2, 0])
 # -> points = [-0.42264973081], gains = [0.38490017946], count = 1   (SOLVED)
@@ -3145,7 +3477,7 @@ control_systems_ai999x.solve('ctrl_breakaway_points', num=[1, 3], den=[1, 3, 2])
 
 <a id="ctrl_departure_angle"></a>
 
-### Root-locus angle of departure from a complex pole — `ctrl_departure_angle`
+### Root-locus angle of departure from a complex pole, `ctrl_departure_angle`
 
 The angle at which the root locus leaves the complex pole p (upper half plane): 180 + sum of angles from the zeros - sum of angles from the other poles.
 
@@ -3166,6 +3498,10 @@ $$
 - **Method:** angle criterion at the pole
 - **Assumes:** exactly one complex pole pair; same-sign leading coefficients
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![departure_deg (angle of departure in degrees, (-180, 180]) as value 4 of den (denominator of G(s) (exactly one complex pole pair)) moves from 0 to 3, the other values as given ([1, 2, 2, 0]); 41 runs of control-systems-ai999x](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-departure-angle-sensitivity)
+
+*departure_deg (angle of departure in degrees, (-180, 180]) as value 4 of den (denominator of G(s) (exactly one complex pole pair)) moves from 0 to 3, the other values as given ([1, 2, 2, 0]); 41 runs of control-systems-ai999x. Other inputs: num = [1]. Marked: the worked example, den[4] = 0, departure_deg = -45.*
 
 ```python
 control_systems_ai999x.solve('ctrl_departure_angle', num=[1], den=[1, 2, 2, 0])
@@ -3189,7 +3525,7 @@ control_systems_ai999x.solve('ctrl_departure_angle', num=[1, 2], den=[1, 2, 5])
 
 <a id="ctrl_arrival_angle"></a>
 
-### Root-locus angle of arrival at a complex zero — `ctrl_arrival_angle`
+### Root-locus angle of arrival at a complex zero, `ctrl_arrival_angle`
 
 The angle at which the root locus arrives at the complex zero z (upper half plane): 180 + sum of angles from the poles - sum of angles from the other zeros.
 
@@ -3210,6 +3546,10 @@ $$
 - **Method:** angle criterion at the zero
 - **Assumes:** exactly one complex zero pair; same-sign leading coefficients
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![arrival_deg (angle of arrival in degrees, (-180, 180]) as value 3 of num (numerator of G(s) (exactly one complex zero pair)) moves from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-arrival-angle-sensitivity)
+
+*arrival_deg (angle of arrival in degrees, (-180, 180]) as value 3 of num (numerator of G(s) (exactly one complex zero pair)) moves from 0.5 to 2.5, the other values as given ([1, 2, 2]); 30 runs of control-systems-ai999x. Other inputs: den = [1, 0]. Marked: the worked example, num[3] = 2, arrival_deg = -135.*
 
 ```python
 control_systems_ai999x.solve('ctrl_arrival_angle', num=[1, 2, 2], den=[1, 0])
@@ -3233,7 +3573,7 @@ control_systems_ai999x.solve('ctrl_arrival_angle', num=[1, 2, 5], den=[1, 3, 0])
 
 <a id="ctrl_state_feedback_poles"></a>
 
-### Closed-loop poles under state feedback u = -K x — `ctrl_state_feedback_poles`
+### Closed-loop poles under state feedback u = -K x, `ctrl_state_feedback_poles`
 
 The characteristic polynomial det(sI - (A - B K)) (exact), the closed-loop poles and stability for a state-feedback gain K.
 
@@ -3257,6 +3597,14 @@ $$
 - **Assumes:** single input
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The plane vectors of the worked example as arrows from the origin: input B = (0, 1), K = (4, 4); returned by control-systems-ai999x: poles = (-2, -2)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-state-feedback-poles-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input B = (0, 1), K = (4, 4); returned by control-systems-ai999x: poles = (-2, -2). Other inputs: A = [[0, 1], [0, 0]]. Marked: the tip of each returned vector.*
+
+![closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], B = [0, 1], K = [4, 4]), drawn in the complex plane: -2 + 0i, -2 + 0i](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-state-feedback-poles-complex)
+
+*closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], B = [0, 1], K = [4, 4]), drawn in the complex plane: -2 + 0i, -2 + 0i.*
+
 ```python
 control_systems_ai999x.solve('ctrl_state_feedback_poles', A=[[0, 1], [0, 0]], B=[0, 1], K=[4, 4])
 # -> char_poly = [1.0, 4.0, 4.0], poles = [-2.0, -2.0], stable = True   (SOLVED)
@@ -3278,7 +3626,7 @@ control_systems_ai999x.solve('ctrl_state_feedback_poles', A=[[0, 1], [-2, -3]], 
 
 <a id="ctrl_ackermann"></a>
 
-### Pole placement by Ackermann's formula — `ctrl_ackermann`
+### Pole placement by Ackermann's formula: `ctrl_ackermann`
 
 The state-feedback gain K that gives A - B K the desired characteristic polynomial alpha(s) (single input), computed exactly.
 
@@ -3299,6 +3647,10 @@ $$
 - **Method:** K = [0 ... 0 1] Wc^{-1} alpha(A) in exact fractions
 - **Assumes:** (A, B) controllable
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); K (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ackermann-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); K (returned). Other inputs: B = [0, 1], alpha = [1, 4, 4].*
 
 ```python
 control_systems_ai999x.solve('ctrl_ackermann', A=[[0, 1], [0, 0]], B=[0, 1], alpha=[1, 4, 4])
@@ -3322,7 +3674,7 @@ control_systems_ai999x.solve('ctrl_ackermann', A=[[0, 1], [-2, -3]], B=[0, 1], a
 
 <a id="ctrl_observer_gain"></a>
 
-### Observer (estimator) gain by pole placement — `ctrl_observer_gain`
+### Observer (estimator) gain by pole placement, `ctrl_observer_gain`
 
 The observer gain L that gives A - L C the desired characteristic polynomial (single output), by duality with Ackermann's formula.
 
@@ -3343,6 +3695,10 @@ $$
 - **Method:** L^T = Ackermann($A^{T}$, $C^{T}$, alpha)
 - **Assumes:** (A, C) observable
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); L (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-observer-gain-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); L (returned). Other inputs: C = [1, 0], alpha = [1, 10, 25].*
 
 ```python
 control_systems_ai999x.solve('ctrl_observer_gain', A=[[0, 1], [0, 0]], C=[1, 0], alpha=[1, 10, 25])
@@ -3366,7 +3722,7 @@ control_systems_ai999x.solve('ctrl_observer_gain', A=[[0, 1], [-2, -3]], C=[1, 0
 
 <a id="ctrl_deadbeat_gain"></a>
 
-### Deadbeat state feedback (discrete time) — `ctrl_deadbeat_gain`
+### Deadbeat state feedback (discrete time): `ctrl_deadbeat_gain`
 
 The gain K that places every eigenvalue of A - B K at $z = 0$, so the discrete closed loop reaches the origin in at most n steps.
 
@@ -3386,6 +3742,14 @@ $$
 - **Method:** Ackermann's formula with alpha(z) = z^n (exact)
 - **Assumes:** (A, B) controllable
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (1, 2)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-deadbeat-gain-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (1, 2). Other inputs: A = [[1, 1], [0, 1]]. Marked: the tip of each returned vector.*
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); K (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-deadbeat-gain-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); K (returned). Other inputs: B = [0, 1].*
 
 ```python
 control_systems_ai999x.solve('ctrl_deadbeat_gain', A=[[1, 1], [0, 1]], B=[0, 1])
@@ -3409,7 +3773,7 @@ control_systems_ai999x.solve('ctrl_deadbeat_gain', A=[[0, 1], [-0.5, 1.5]], B=[0
 
 <a id="ctrl_state_transition"></a>
 
-### State-transition matrix e^{At} — `ctrl_state_transition`
+### State-transition matrix e^{At}, `ctrl_state_transition`
 
 The state-transition matrix Phi(t) = e^{At} that maps x(0) to x(t) for x' = A x.
 
@@ -3429,6 +3793,10 @@ $$
 - **Method:** scaling and squaring with a Taylor series
 - **Assumes:** |A| $t  \leq  40$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Phi (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-state-transition-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Phi (returned). Other inputs: t = 2.*
 
 ```python
 control_systems_ai999x.solve('ctrl_state_transition', A=[[0, 1], [0, 0]], t=2)
@@ -3452,7 +3820,7 @@ control_systems_ai999x.solve('ctrl_state_transition', A=[[-1, 0], [0, -2]], t=1)
 
 <a id="ctrl_ss_response"></a>
 
-### State response to an initial state and a constant input — `ctrl_ss_response`
+### State response to an initial state and a constant input, `ctrl_ss_response`
 
 x(t) = e^{At} x(0) + (integral of e^{A tau} d tau) B u for x' = A x + B u with a constant input u.
 
@@ -3476,6 +3844,14 @@ $$
 - **Assumes:** |A| $t  \leq  40$; $t  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The plane vectors of the worked example as arrows from the origin: input B = (0, 1), x0 = (0, 0); returned by control-systems-ai999x: x = (9, 6)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ss-response-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input B = (0, 1), x0 = (0, 0); returned by control-systems-ai999x: x = (9, 6). Other inputs: A = [[0, 1], [0, 0]], u = 2, t = 3. Marked: the tip of each returned vector.*
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); x (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ss-response-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); x (returned). Other inputs: B = [0, 1], x0 = [0, 0], u = 2, t = 3.*
+
 ```python
 control_systems_ai999x.solve('ctrl_ss_response', A=[[0, 1], [0, 0]], B=[0, 1], x0=[0, 0], u=2, t=3)
 # -> x = [9.0, 6.0]   (SOLVED)
@@ -3498,7 +3874,7 @@ control_systems_ai999x.solve('ctrl_ss_response', A=[[-1]], B=[1], x0=[2], u=1, t
 
 <a id="ctrl_c2d_zoh"></a>
 
-### Zero-order-hold discretization of a transfer function — `ctrl_c2d_zoh`
+### Zero-order-hold discretization of a transfer function, `ctrl_c2d_zoh`
 
 The step-invariant (ZOH) discrete equivalent G($z) = (1 - z$^{-1}) Z{G(s)/s} of a proper G(s) sampled every T seconds.
 
@@ -3520,6 +3896,14 @@ $$
 - **Method:** exponential of [[A, B], [0, 0]] T in state space, then Faddeev-LeVerrier
 - **Assumes:** proper G(s); $T > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0, 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-c2d-zoh-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0, 0.393469), denz = (1, -0.606531). Other inputs: num = [1], T = 0.5. Marked: the tip of each returned vector.*
+
+![denominator in z (leading coefficient 1) (denz) at each numerator in z (padded, normalised) (numz), both returned by control-systems-ai999x for the worked example (num = [1], den = [1, 1], T = 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-c2d-zoh-series)
+
+*denominator in z (leading coefficient 1) (denz) at each numerator in z (padded, normalised) (numz), both returned by control-systems-ai999x for the worked example (num = [1], den = [1, 1], T = 0.5): 0 → 1; 0.393469 → -0.606531.*
 
 ```python
 control_systems_ai999x.solve('ctrl_c2d_zoh', num=[1], den=[1, 1], T=0.5)
@@ -3543,7 +3927,7 @@ control_systems_ai999x.solve('ctrl_c2d_zoh', num=[1], den=[1, 0, 0], T=1)
 
 <a id="ctrl_c2d_foh"></a>
 
-### First-order-hold (triangle-hold) discretization — `ctrl_c2d_foh`
+### First-order-hold (triangle-hold) discretization, `ctrl_c2d_foh`
 
 The ramp-invariant (triangle-hold, non-causal first-order hold) discrete equivalent of a proper G(s) sampled every T seconds.
 
@@ -3565,6 +3949,10 @@ $$
 - **Method:** exponential of the augmented matrix [[A T, B T, 0], [0, 0, 1], [0, 0, 0]]
 - **Assumes:** proper G(s); $T > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The plane vectors of the worked example as arrows from the origin: input den = (1, 0); returned by control-systems-ai999x: numz = (0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-c2d-foh-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input den = (1, 0); returned by control-systems-ai999x: numz = (0.5, 0.5), denz = (1, -1). Other inputs: num = [1], T = 1. Marked: the tip of each returned vector.*
 
 ```python
 control_systems_ai999x.solve('ctrl_c2d_foh', num=[1], den=[1, 0], T=1)
@@ -3588,7 +3976,7 @@ control_systems_ai999x.solve('ctrl_c2d_foh', num=[1], den=[1, 1], T=1)
 
 <a id="ctrl_tustin_prewarp"></a>
 
-### Tustin discretization with frequency prewarping — `ctrl_tustin_prewarp`
+### Tustin discretization with frequency prewarping, `ctrl_tustin_prewarp`
 
 The bilinear transform s = (w/tan(w T/2)) $(z - 1)/(z + 1)$, which matches the continuous frequency response exactly at the prewarping frequency w.
 
@@ -3612,6 +4000,10 @@ $$
 - **Assumes:** proper G(s); $0 < w$ $T < pi$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-tustin-prewarp-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0.353296, 0.353296), denz = (1, -0.293408). Other inputs: num = [1], T = 1, w = 1. Marked: the tip of each returned vector.*
+
 ```python
 control_systems_ai999x.solve('ctrl_tustin_prewarp', num=[1], den=[1, 1], T=1, w=1)
 # -> numz = [0.353296003487, 0.353296003487], denz = [1.0, -0.293407993026]   (SOLVED)
@@ -3634,7 +4026,7 @@ control_systems_ai999x.solve('ctrl_tustin_prewarp', num=[1], den=[1, 0], T=0.5, 
 
 <a id="ctrl_jury_test"></a>
 
-### Jury (Schur-Cohn) stability test for a discrete polynomial — `ctrl_jury_test`
+### Jury (Schur-Cohn) stability test for a discrete polynomial, `ctrl_jury_test`
 
 Whether every root of a polynomial in z lies inside the unit circle (Jury/Schur-Cohn table in exact arithmetic), with the necessary-condition values P(1) and $(-1)^{n}$ P(-1).
 
@@ -3655,6 +4047,10 @@ $$
 - **Method:** Schur-Cohn reduction q <- $q - (a_n/a_0)$ q_reversed in exact fractions
 - **Assumes:** the table is not singular
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The input coefficients (polynomial coefficients in z, highest power first) as given in the worked example, one value per position (3 values); marked from what control-systems-ai999x returned: P1 = 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-jury-test-data)
+
+*The input coefficients (polynomial coefficients in z, highest power first) as given in the worked example, one value per position (3 values); marked from what control-systems-ai999x returned: P1 = 0.15. Also returned: Pm1 = 2.55.*
 
 ```python
 control_systems_ai999x.solve('ctrl_jury_test', coefficients=[1, -1.2, 0.35])
@@ -3678,7 +4074,7 @@ control_systems_ai999x.solve('ctrl_jury_test', coefficients=[1, -2, 1.5])
 
 <a id="ctrl_step_response"></a>
 
-### Step response of a transfer function at a given time — `ctrl_step_response`
+### Step response of a transfer function at a given time, `ctrl_step_response`
 
 y(t) of any proper G(s) after a step of size A, computed exactly through the state-space matrix exponential.
 
@@ -3700,6 +4096,10 @@ $$
 - **Method:** controllable canonical form; exponential of [[A, B], [0, 0]] t
 - **Assumes:** proper G(s); $t  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![y (output at time t) against t (time in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-step-response-curve)
+
+*y (output at time t) against t (time in seconds) from 0.1 to 10 on a logarithmic axis. Other inputs as in the worked example: num = [1], den = [1, 1]. 41 points computed by control-systems-ai999x; marked: the worked example, t = 1, y = 0.632121.*
 
 ```python
 control_systems_ai999x.solve('ctrl_step_response', num=[1], den=[1, 1], t=1)
@@ -3723,7 +4123,7 @@ control_systems_ai999x.solve('ctrl_step_response', num=[4], den=[1, 2, 4], t=1.0
 
 <a id="ctrl_true_settling_time"></a>
 
-### Exact settling time of a second-order step response — `ctrl_true_settling_time`
+### Exact settling time of a second-order step response, `ctrl_true_settling_time`
 
 The last time at which the unit step response of wn^2/(s^2 + 2 zeta wn s + wn^2) leaves the band |$y - 1$| = band (not the envelope estimate), and which extremum precedes it.
 
@@ -3745,6 +4145,14 @@ $$
 - **Method:** extrema at k pi/wd; the last band crossing lies between the last extremum outside the band and the next zero of $y - 1$ (bisection)
 - **Assumes:** $0 < \zeta < 1$; 0 < band < 50 %
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![Ts (exact settling time) against zeta (damping ratio (0 < zeta < 1)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-true-settling-time-curve)
+
+*Ts (exact settling time) against zeta (damping ratio (0 < zeta < 1)) from 0.02 to 0.98. One curve for each value of wn (natural frequency in rad/s): 1, 0.5, 2. 41 points per curve computed by control-systems-ai999x; marked: the worked example, zeta = 0.5, Ts = 8.07635 s.*
+
+![Ts (exact settling time) over zeta (damping ratio (0 < zeta < 1)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-true-settling-time-field)
+
+*Ts (exact settling time) over zeta (damping ratio (0 < zeta < 1)) from 0.02 to 0.98 and wn (natural frequency in rad/s) from 0.5 to 1.5: each of the 21 × 15 cells is one run of control-systems-ai999x, shaded by its value (light 2.44244 s to dark 389.989 s); iso-lines at Ts = 100, 200, 300 s. Marked: the worked example, zeta = 0.5, wn = 1, Ts = 8.07635 s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_true_settling_time', zeta=0.5, wn=1)
@@ -3768,7 +4176,7 @@ control_systems_ai999x.solve('ctrl_true_settling_time', zeta=0.9, wn=1, band=0.0
 
 <a id="ctrl_zn_from_plant"></a>
 
-### Ziegler-Nichols tuning from a plant model — `ctrl_zn_from_plant`
+### Ziegler-Nichols tuning from a plant model: `ctrl_zn_from_plant`
 
 The ultimate gain $Ku = 1$/|G(j w180)| and period $Pu = 2$ $pi/w180$ of a plant model, then the Ziegler-Nichols P, PI or PID settings.
 
@@ -3796,6 +4204,10 @@ $$
 - **Assumes:** exactly one phase crossover
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Ku (ultimate gain) as value 4 of den (plant denominator) moves from 0 to 4](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-zn-from-plant-sensitivity)
+
+*Ku (ultimate gain) as value 4 of den (plant denominator) moves from 0 to 4.5, the other values as given ([1, 3, 2, 0]); 41 runs of control-systems-ai999x. Other inputs: num = [1], controller = PID. Marked: the worked example, den[4] = 0, Ku = 6.*
+
 ```python
 control_systems_ai999x.solve('ctrl_zn_from_plant', num=[1], den=[1, 3, 2, 0], controller='PID')
 # -> Kp = 3.6, Ti = 2.22144 s, Td = 0.55536 s, Ki = 1.62057, Kd = 1.9993, Ku = 6, Pu = 4.44288 s   (SOLVED)
@@ -3818,7 +4230,7 @@ control_systems_ai999x.solve('ctrl_zn_from_plant', num=[1], den=[1, 6, 11, 6], c
 
 <a id="ctrl_lead_design"></a>
 
-### Lead compensator design for a required phase lead — `ctrl_lead_design`
+### Lead compensator design for a required phase lead, `ctrl_lead_design`
 
 alpha = (1 - sin $\phi)/(1 + sin$ phi) and T = 1/(w_m sqrt(alpha)) so that C($s) = (T$ $s + 1)/(\alpha$ T s + 1) adds the phase lead phi at w_m; its zero, pole and gain at w_m.
 
@@ -3843,6 +4255,10 @@ $$
 - **Assumes:** $0 < \phi < 90$ degrees; $w_m > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![alpha (alpha (pole/zero ratio z/p)) against phi_max_deg (required maximum phase lead in degrees (0 to 90)) from 0 to 90](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lead-design-curve)
+
+*alpha (alpha (pole/zero ratio z/p)) against phi_max_deg (required maximum phase lead in degrees (0 to 90)) from 0 to 90. Other inputs as in the worked example: w_m = 1. 39 points computed by control-systems-ai999x; marked: the worked example, phi_max_deg = 30, alpha = 0.333333.*
+
 ```python
 control_systems_ai999x.solve('ctrl_lead_design', phi_max_deg=30, w_m=1)
 # -> alpha = 0.333333, T = 1.73205 s, zero = 0.57735, pole = 1.73205, gain_db = 4.77121   (SOLVED)
@@ -3865,7 +4281,7 @@ control_systems_ai999x.solve('ctrl_lead_design', phi_max_deg=53.13010235415598, 
 
 <a id="ctrl_lag_design"></a>
 
-### Lag compensator placement — `ctrl_lag_design`
+### Lag compensator placement: `ctrl_lag_design`
 
 C(s) = (s + z)/(s + p) with z = w_c/ratio (default a decade below the crossover) and $p = z/\beta$: zero, pole, DC gain beta, and the phase lag and gain it adds at w_c.
 
@@ -3891,6 +4307,14 @@ $$
 - **Assumes:** $\beta > 1$; ratio >= 2
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![phase_deg (phase added at w_c in degrees (negative)) against beta (required low-frequency gain increase (> 1)), with w_c = 1](https://huggingface.co/AI999X/control-systems-ai999x/resolve/main/figures/ctrl-lag-design-phase-deg-vs-beta.svg)
+
+*phase_deg (phase added at w_c in degrees (negative)) against beta (required low-frequency gain increase (> 1)), with w_c = 1. 31 points computed by control-systems-ai999x; marked: beta = 10, phase_deg = -5.13765.*
+
+![phase_deg (phase added at w_c in degrees (negative)) against beta (required low-frequency gain increase (> 1)) from 1 to 100 on a logarithmic axis](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lag-design-curve)
+
+*phase_deg (phase added at w_c in degrees (negative)) against beta (required low-frequency gain increase (> 1)) from 1 to 100 on a logarithmic axis. Other inputs as in the worked example: w_c = 1. 40 points computed by control-systems-ai999x; marked: the worked example, beta = 10, phase_deg = -5.13765.*
+
 ```python
 control_systems_ai999x.solve('ctrl_lag_design', beta=10, w_c=1)
 # -> zero = 0.1, pole = 0.01, dc_gain = 10, phase_deg = -5.13765, magnitude_db = 0.0427795   (SOLVED)
@@ -3913,7 +4337,7 @@ control_systems_ai999x.solve('ctrl_lag_design', beta=5, w_c=2, ratio=4)
 
 <a id="ctrl_pade"></a>
 
-### Pade approximation of a time delay — `ctrl_pade`
+### Pade approximation of a time delay: `ctrl_pade`
 
 The (n, n) Pade approximation of e^{-theta s} as a rational transfer function (denominator's leading coefficient 1).
 
@@ -3934,6 +4358,10 @@ $$
 - **Method:** Pade coefficients $c_k = (2n-k)$! n! / ((2n)! k! (n-k)!)
 - **Assumes:** $\theta > 0$; $1  \leq  n  \leq  6$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![denominator coefficients (leading 1) (den) at each numerator coefficients (num), both returned by control-systems-ai999x for the worked example (theta = 2, n = 1): -1 → 1; 1 → 1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pade-series)
+
+*denominator coefficients (leading 1) (den) at each numerator coefficients (num), both returned by control-systems-ai999x for the worked example (theta = 2, n = 1): -1 → 1; 1 → 1.*
 
 ```python
 control_systems_ai999x.solve('ctrl_pade', theta=2, n=1)
@@ -3957,7 +4385,7 @@ control_systems_ai999x.solve('ctrl_pade', theta=1, n=2)
 
 <a id="ctrl_scalar_lqr"></a>
 
-### LQR for a first-order system — `ctrl_scalar_lqr`
+### LQR for a first-order system: `ctrl_scalar_lqr`
 
 For x' = a x + b u minimising the integral of q $x^{2} + r$ $u^{2}$: the Riccati solution P, the optimal gain $K = b$ P/r and the closed-loop pole -sqrt($a^{2} + b^{2}$ q/r).
 
@@ -3982,6 +4410,10 @@ $$
 - **Assumes:** $b  \neq  0$; q, $r > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![K (optimal feedback gain) against a (system coefficient) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-scalar-lqr-curve)
+
+*K (optimal feedback gain) against a (system coefficient) from 0.1 to 10 on a logarithmic axis. One curve for each value of b (input coefficient): 1, 0.5, 2. Other inputs as in the worked example: q = 3, r = 1. 41 points per curve computed by control-systems-ai999x; marked: the worked example, a = 1, K = 3.*
+
 ```python
 control_systems_ai999x.solve('ctrl_scalar_lqr', a=1, b=1, q=3, r=1)
 # -> P = 3, K = 3, pole = -2   (SOLVED)
@@ -4004,7 +4436,7 @@ control_systems_ai999x.solve('ctrl_scalar_lqr', a=0, b=2, q=4, r=1)
 
 <a id="ctrl_pi_pole_placement"></a>
 
-### PI gains placing the closed-loop poles of a first-order plant — `ctrl_pi_pole_placement`
+### PI gains placing the closed-loop poles of a first-order plant, `ctrl_pi_pole_placement`
 
 Kp = (2 zeta wn tau - 1)/K and $Ki = wn^{2}$ tau/K, so that K/(tau s + 1) under PI control with unity feedback has the characteristic polynomial $s^{2} + 2$ zeta wn $s + wn^{2.}$
 
@@ -4028,6 +4460,10 @@ $$
 - **Assumes:** tau, zeta, $wn > 0$; $K  \neq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Ki (integral gain) against K (plant gain) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pi-pole-placement-curve)
+
+*Ki (integral gain) against K (plant gain) from 1 to 3. One curve for each value of wn (desired natural frequency in rad/s): 1, 0.5, 2. Other inputs as in the worked example: tau = 5, zeta = 0.7. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Ki = 2.5.*
+
 ```python
 control_systems_ai999x.solve('ctrl_pi_pole_placement', K=2, tau=5, zeta=0.7, wn=1)
 # -> Kp = 3, Ki = 2.5   (SOLVED)
@@ -4050,7 +4486,7 @@ control_systems_ai999x.solve('ctrl_pi_pole_placement', K=1, tau=1, zeta=1, wn=2)
 
 <a id="ctrl_kalman_scalar_steady"></a>
 
-### Steady-state gain of a scalar Kalman filter — `ctrl_kalman_scalar_steady`
+### Steady-state gain of a scalar Kalman filter, `ctrl_kalman_scalar_steady`
 
 For $x_k = a$ x_{$k-1$} + w (variance q) and $z_k = c$ x_k + v (variance r): the steady prior variance P (discrete Riccati equation), the steady Kalman gain and the posterior variance.
 
@@ -4075,6 +4511,10 @@ $$
 - **Assumes:** $c  \neq  0$; q, $r > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![gain (steady Kalman gain) against a (state transition coefficient) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-kalman-scalar-steady-curve)
+
+*gain (steady Kalman gain) against a (state transition coefficient) from 0.1 to 10 on a logarithmic axis. One curve for each value of c (measurement coefficient): 1, 0.5, 2. Other inputs as in the worked example: q = 1, r = 1. 41 points per curve computed by control-systems-ai999x; marked: the worked example, a = 1, gain = 0.618034.*
+
 ```python
 control_systems_ai999x.solve('ctrl_kalman_scalar_steady', a=1, c=1, q=1, r=1)
 # -> P_prior = 1.61803, gain = 0.618034, P_post = 0.618034   (SOLVED)
@@ -4097,7 +4537,7 @@ control_systems_ai999x.solve('ctrl_kalman_scalar_steady', a=0, c=1, q=2, r=2)
 
 <a id="ctrl_fopdt_smith"></a>
 
-### First-order-plus-dead-time fit by Smith's two-point method — `ctrl_fopdt_smith`
+### First-order-plus-dead-time fit by Smith's two-point method, `ctrl_fopdt_smith`
 
 $K = dy/du$, $\tau = 1.5$ $(t63 - t28)$ and $\theta = t63 - \tau$ from the times at which a step response reaches 28.3 % and 63.2 % of its change.
 
@@ -4122,6 +4562,10 @@ $$
 - **Assumes:** $0 < t28 < t63$; $\theta  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![tau (time constant) against t63 (time to 63](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-fopdt-smith-curve)
+
+*tau (time constant) against t63 (time to 63.2 % of the change (s)) from 5 to 15. One curve for each value of t28 (time to 28.3 % of the change (s)): 4, 8. Other inputs as in the worked example: dy = 6, du = 2. 22 points per curve computed by control-systems-ai999x; marked: the worked example, t63 = 10, tau = 9 s.*
+
 ```python
 control_systems_ai999x.solve('ctrl_fopdt_smith', t28=4, t63=10, dy=6, du=2)
 # -> K = 3, tau = 9 s, theta = 1 s   (SOLVED)
@@ -4144,7 +4588,7 @@ control_systems_ai999x.solve('ctrl_fopdt_smith', t28=2, t63=5, dy=1, du=1)
 
 <a id="ctrl_lqr"></a>
 
-### Continuous-time LQR gain (Riccati equation) — `ctrl_lqr`
+### Continuous-time LQR gain (Riccati equation), `ctrl_lqr`
 
 The optimal state feedback $u = -K$ x minimising the integral of $x^{T}$ Q x + R $u^{2}$ for x' = A x + B u: the Riccati solution P, $K = R$^{-1} $B^{T}$ P and the closed-loop poles.
 
@@ -4169,6 +4613,14 @@ $$
 - **Assumes:** (A, B) controllable; Q symmetric positive definite; $R > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (1, 1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lqr-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (1, 1.73205). Other inputs: A = [[0, 1], [0, 0]], Q = [[1, 0], [0, 1]], R = 1. Marked: the tip of each returned vector.*
+
+![closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1), drawn in the complex plane: -0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lqr-complex)
+
+*closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1), drawn in the complex plane: -0.866025 − 0.5i, -0.866025 + 0.5i.*
+
 ```python
 control_systems_ai999x.solve('ctrl_lqr', A=[[0, 1], [0, 0]], B=[0, 1], Q=[[1, 0], [0, 1]], R=1)
 # -> K = [1.0, 1.73205080757], P = [[1.73205080757, 1.0], [1.0, 1.73205080757]], poles = [(-0.866025403784-0.5j), (-0.866025403784+0.5j)]   (SOLVED)
@@ -4191,7 +4643,7 @@ control_systems_ai999x.solve('ctrl_lqr', A=[[0, 1], [-1, 0]], B=[0, 1], Q=[[1, 0
 
 <a id="ctrl_dlqr"></a>
 
-### Discrete-time LQR gain (discrete Riccati equation) — `ctrl_dlqr`
+### Discrete-time LQR gain (discrete Riccati equation), `ctrl_dlqr`
 
 The optimal state feedback $u_k = -K$ x_k minimising the sum of $x^{T}$ Q x + R $u^{2}$ for x_{$k+1$} = A x_k + B u_k: P from the discrete Riccati equation, K = (R + B^T P B)^{-1} $B^{T}$ P A and the closed-loop poles.
 
@@ -4216,6 +4668,14 @@ $$
 - **Assumes:** (A, B) controllable; Q symmetric positive definite; $R > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-dlqr-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (0.422082, 1.24393). Other inputs: A = [[1, 1], [0, 1]], Q = [[1, 0], [0, 1]], R = 1. Marked: the tip of each returned vector.*
+
+![closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[1, 1], [0, 1]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1), drawn in the complex plane: 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-dlqr-complex)
+
+*closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[1, 1], [0, 1]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1), drawn in the complex plane: 0.378036 − 0.18773i, 0.378036 + 0.18773i.*
+
 ```python
 control_systems_ai999x.solve('ctrl_dlqr', A=[[1, 1], [0, 1]], B=[0, 1], Q=[[1, 0], [0, 1]], R=1)
 # -> K = [0.422082440385, 1.2439288539], P = [[2.94712296671, 2.36920540709], [2.36920540709, 4.613134261]], poles = [(0.378035573048-0.187730370457j), (0.378035573048+0.187730370457j)]   (SOLVED)
@@ -4238,7 +4698,7 @@ control_systems_ai999x.solve('ctrl_dlqr', A=[[0.5, 0], [0, 0.8]], B=[1, 1], Q=[[
 
 <a id="ctrl_kalman_bucy"></a>
 
-### Steady-state Kalman-Bucy filter gain — `ctrl_kalman_bucy`
+### Steady-state Kalman-Bucy filter gain: `ctrl_kalman_bucy`
 
 For x' = A x + w (covariance W), $y = C$ x + v (variance V): the steady error covariance P from the filter Riccati equation A P + P $A^{T} - P$ $C^{T}$ V^{-1} C $P + W = 0$, the gain $L = P$ $C^{T} / V$ and the estimator poles (eigenvalues of A - L C).
 
@@ -4263,6 +4723,14 @@ $$
 - **Assumes:** (A, C) observable; W positive definite; $V > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The plane vectors of the worked example as arrows from the origin: input C = (1, 0); returned by control-systems-ai999x: L = (1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-kalman-bucy-vectors)
+
+*The plane vectors of the worked example as arrows from the origin: input C = (1, 0); returned by control-systems-ai999x: L = (1.73205, 1). Other inputs: A = [[0, 1], [0, 0]], W = [[1, 0], [0, 1]], V = 1. Marked: the tip of each returned vector.*
+
+![estimator poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], C = [1, 0], W = [[1, 0], [0, 1]], V = 1), drawn in the complex plane: -0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-kalman-bucy-complex)
+
+*estimator poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], C = [1, 0], W = [[1, 0], [0, 1]], V = 1), drawn in the complex plane: -0.866025 − 0.5i, -0.866025 + 0.5i.*
+
 ```python
 control_systems_ai999x.solve('ctrl_kalman_bucy', A=[[0, 1], [0, 0]], C=[1, 0], W=[[1, 0], [0, 1]], V=1)
 # -> L = [1.73205080757, 1.0], P = [[1.73205080757, 1.0], [1.0, 1.73205080757]], poles = [(-0.866025403784-0.5j), (-0.866025403784+0.5j)]   (SOLVED)
@@ -4285,7 +4753,7 @@ control_systems_ai999x.solve('ctrl_kalman_bucy', A=[[-1]], C=[1], W=[[3]], V=1)
 
 <a id="ctrl_discrete_kalman_gain"></a>
 
-### Steady-state discrete Kalman filter gain — `ctrl_discrete_kalman_gain`
+### Steady-state discrete Kalman filter gain: `ctrl_discrete_kalman_gain`
 
 For x_{$k+1$} = A x_k + w (covariance Q), $y_k = C$ x_k + v (variance R): the steady prior covariance P from the discrete filter Riccati equation and the measurement-update gain $K = P$ $C^{T}$ (C P C^T + R)^{-1}.
 
@@ -4309,6 +4777,10 @@ $$
 - **Assumes:** (A, C) observable; Q positive definite; $R > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![The worked example of Steady-state discrete Kalman filter gain as inputs and results: stated A = [[1]], C = [1], Q = [[1]], R = 1; returned by control-systems-ai999x: K = [0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-discrete-kalman-gain-io)
+
+*The worked example of Steady-state discrete Kalman filter gain as inputs and results: stated A = [[1]], C = [1], Q = [[1]], R = 1; returned by control-systems-ai999x: K = [0.61803398875], P_prior = [[1.61803398875]].*
+
 ```python
 control_systems_ai999x.solve('ctrl_discrete_kalman_gain', A=[[1]], C=[1], Q=[[1]], R=1)
 # -> K = [0.61803398875], P_prior = [[1.61803398875]]   (SOLVED)
@@ -4331,7 +4803,7 @@ control_systems_ai999x.solve('ctrl_discrete_kalman_gain', A=[[1, 1], [0, 1]], C=
 
 <a id="ctrl_lyapunov"></a>
 
-### Continuous Lyapunov equation — `ctrl_lyapunov`
+### Continuous Lyapunov equation: `ctrl_lyapunov`
 
 The solution P of $A^{T}$ P + P $A + Q = 0$ for a stable A (exact), and whether P is positive definite (with $Q > 0$ that certifies stability).
 
@@ -4352,6 +4824,10 @@ $$
 - **Method:** Kronecker linear system in exact fractions
 - **Assumes:** A stable; Q symmetric
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Q (input); P (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lyapunov-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Q (input); P (returned).*
 
 ```python
 control_systems_ai999x.solve('ctrl_lyapunov', A=[[-1, 0], [0, -2]], Q=[[2, 0], [0, 4]])
@@ -4376,7 +4852,7 @@ control_systems_ai999x.solve('ctrl_lyapunov', A=[[0, 1], [-2, -3]], Q=[[1, 0], [
 
 <a id="ctrl_discrete_lyapunov"></a>
 
-### Discrete Lyapunov equation — `ctrl_discrete_lyapunov`
+### Discrete Lyapunov equation: `ctrl_discrete_lyapunov`
 
 The solution P of $A^{T}$ P $A - P + Q = 0$ for a Schur-stable A (exact), and whether P is positive definite.
 
@@ -4397,6 +4873,10 @@ $$
 - **Method:** Kronecker linear system in exact fractions
 - **Assumes:** A Schur stable; Q symmetric
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Q (input); P (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-discrete-lyapunov-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Q (input); P (returned).*
 
 ```python
 control_systems_ai999x.solve('ctrl_discrete_lyapunov', A=[[0.5, 0], [0, 0.5]], Q=[[3, 0], [0, 3]])
@@ -4421,7 +4901,7 @@ control_systems_ai999x.solve('ctrl_discrete_lyapunov', A=[[0, 1], [0, 0]], Q=[[1
 
 <a id="ctrl_ctrb_gramian"></a>
 
-### Controllability Gramian — `ctrl_ctrb_gramian`
+### Controllability Gramian: `ctrl_ctrb_gramian`
 
 The infinite-horizon controllability Gramian Wc solving A Wc + Wc $A^{T} + B$ $B^{T} = 0$ for a stable A (exact), its determinant and whether (A, B) is controllable (Wc nonsingular).
 
@@ -4442,6 +4922,10 @@ $$
 - **Method:** Lyapunov equation in exact fractions
 - **Assumes:** A stable
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Wc (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ctrb-gramian-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Wc (returned). Other inputs: B = [1, 1].*
 
 ```python
 control_systems_ai999x.solve('ctrl_ctrb_gramian', A=[[-1, 0], [0, -2]], B=[1, 1])
@@ -4465,7 +4949,7 @@ control_systems_ai999x.solve('ctrl_ctrb_gramian', A=[[-1, 0], [0, -2]], B=[1, 0]
 
 <a id="ctrl_obsv_gramian"></a>
 
-### Observability Gramian — `ctrl_obsv_gramian`
+### Observability Gramian: `ctrl_obsv_gramian`
 
 The infinite-horizon observability Gramian Wo solving $A^{T}$ Wo + Wo $A + C^{T}$ $C = 0$ for a stable A (exact), its determinant and whether (A, C) is observable.
 
@@ -4486,6 +4970,10 @@ $$
 - **Method:** Lyapunov equation in exact fractions
 - **Assumes:** A stable
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Wo (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-obsv-gramian-matrix)
+
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Wo (returned). Other inputs: C = [1, 1].*
 
 ```python
 control_systems_ai999x.solve('ctrl_obsv_gramian', A=[[-1, 0], [0, -2]], C=[1, 1])
@@ -4509,7 +4997,7 @@ control_systems_ai999x.solve('ctrl_obsv_gramian', A=[[0, 1], [-2, -3]], C=[1, 0]
 
 <a id="ctrl_h2_norm"></a>
 
-### H2 norm of a stable transfer function — `ctrl_h2_norm`
+### H2 norm of a stable transfer function: `ctrl_h2_norm`
 
 ||G||$_2 = sqrt$((1/(2 pi)) integral of |G(jw)|^2 dw) of a stable, strictly proper G(s), computed exactly as $B^{T}$ Wo B from the observability Gramian.
 
@@ -4530,6 +5018,10 @@ $$
 - **Method:** Lyapunov equation of the controllable canonical form in exact fractions
 - **Assumes:** stable; strictly proper
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![h2 (H2 norm) as value 2 of den (denominator) moves from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-h2-norm-sensitivity)
+
+*h2 (H2 norm) as value 2 of den (denominator) moves from 0.5 to 1.5, the other values as given ([1, 1]); 41 runs of control-systems-ai999x. Other inputs: num = [1]. Marked: the worked example, den[2] = 1, h2 = 0.707107.*
 
 ```python
 control_systems_ai999x.solve('ctrl_h2_norm', num=[1], den=[1, 1])
@@ -4554,7 +5046,7 @@ control_systems_ai999x.solve('ctrl_h2_norm', num=[1], den=[1, 2, 1])
 
 <a id="ctrl_hinf_norm"></a>
 
-### H-infinity norm (peak gain) of a stable transfer function — `ctrl_hinf_norm`
+### H-infinity norm (peak gain) of a stable transfer function, `ctrl_hinf_norm`
 
 The peak gain sup_w |G(jw)| of a stable proper G(s), in ratio and dB, and the frequency where it occurs (0 when the peak is the DC gain).
 
@@ -4576,6 +5068,10 @@ $$
 - **Method:** stationary points of |N(jw)|^2/|D(jw)|^2 (positive real roots of f' g - f g') and $w = 0$
 - **Assumes:** stable; proper; peak at a finite frequency
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![hinf (H-infinity norm (peak gain)) as value 2 of den (denominator) moves from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-hinf-norm-sensitivity)
+
+*hinf (H-infinity norm (peak gain)) as value 2 of den (denominator) moves from 0.5 to 1.5, the other values as given ([1, 1]); 41 runs of control-systems-ai999x. Other inputs: num = [1]. Marked: the worked example, den[2] = 1, hinf = 1.*
 
 ```python
 control_systems_ai999x.solve('ctrl_hinf_norm', num=[1], den=[1, 1])
@@ -4599,7 +5095,7 @@ control_systems_ai999x.solve('ctrl_hinf_norm', num=[1], den=[1, 0.2, 1])
 
 <a id="ctrl_nyquist"></a>
 
-### Nyquist criterion: encirclements of -1 — `ctrl_nyquist`
+### Nyquist criterion: encirclements of -1, `ctrl_nyquist`
 
 For the open loop K G(s) under unity negative feedback: the open-loop right-half-plane poles P, the closed-loop right-half-plane poles Z and the net clockwise encirclements $N = Z - P$ of the point -1 by the Nyquist curve.
 
@@ -4624,6 +5120,14 @@ $$
 - **Assumes:** no open-loop or closed-loop pole on the imaginary axis
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![true when Z = 0 (stable) along K (loop gain (default 1)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-nyquist-decision)
+
+*true when Z = 0 (stable) along K (loop gain (default 1)) from 0.2 to 20 (logarithmic axis): 81 runs of control-systems-ai999x, each band coloured by the verdict returned (yes, no); it changes near K = 0.973935; the line is N (net clockwise encirclements of -1). Other inputs as in the worked example: num = [1], den = [1, -1]. Marked: the worked example, K = 2 → yes.*
+
+![N (net clockwise encirclements of -1) against K (loop gain (default 1)) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-nyquist-curve)
+
+*N (net clockwise encirclements of -1) against K (loop gain (default 1)) from 0.2 to 20 on a logarithmic axis. Other inputs as in the worked example: num = [1], den = [1, -1]. 41 points computed by control-systems-ai999x; marked: the worked example, K = 2, N = -1.*
+
 ```python
 control_systems_ai999x.solve('ctrl_nyquist', num=[1], den=[1, -1], K=2)
 # -> P = 1, Z = 0, N = -1, stable = True   (SOLVED)
@@ -4646,7 +5150,7 @@ control_systems_ai999x.solve('ctrl_nyquist', num=[1], den=[1, 6, 11, 6], K=100)
 
 <a id="ctrl_sensitivity_peak"></a>
 
-### Peak sensitivity Ms and modulus margin — `ctrl_sensitivity_peak`
+### Peak sensitivity Ms and modulus margin: `ctrl_sensitivity_peak`
 
 Ms = max |1/(1 + L(jw))| of a stable unity-feedback loop, its frequency, and the modulus (stability) margin $1/Ms$: the smallest distance from the Nyquist curve $to -1.$
 
@@ -4669,6 +5173,10 @@ $$
 - **Method:** stationary points of |D(jw)|^2/|D(jw) + N(jw)|^2 (positive real roots of f' g - f g')
 - **Assumes:** closed loop stable; strictly proper L(s)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![Ms (peak sensitivity) as value 4 of den (denominator of L(s)) moves from 0 to 4](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-sensitivity-peak-sensitivity)
+
+*Ms (peak sensitivity) as value 4 of den (denominator of L(s)) moves from 0 to 4.5, the other values as given ([1, 3, 2, 0]); 36 runs of control-systems-ai999x. Other inputs: num = [2]. Marked: the worked example, den[4] = 0, Ms = 2.31231.*
 
 ```python
 control_systems_ai999x.solve('ctrl_sensitivity_peak', num=[2], den=[1, 3, 2, 0])
