@@ -242,7 +242,7 @@ $$
 
 ![y (output at time t) against tau (time constant in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-first-order-step-curve)
 
-*y (output at time t) against tau (time constant in seconds) from 0.5 to 50 on a logarithmic axis. One curve for each value of K (steady-state (DC) gain of the system): 2, 1, 4. Other inputs as in the worked example: t = 5. 41 points per curve computed by control-systems-ai999x; marked: the worked example, tau = 5, y = 1.26424.*
+*y (output at time t) against tau (time constant in seconds) from 0.5 to 50 on a logarithmic axis. One curve for each value of K (steady-state (DC) gain of the system): 2, 1, 4. Other inputs as in the worked example: t = 5.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, tau = 5, y = 1.26424.*
 
 ```python
 control_systems_ai999x.solve('ctrl_first_order_step', K=2, tau=5, t=5)
@@ -294,7 +294,7 @@ $$
 
 ![rise_time (10-90 % rise time) against tau (time constant in seconds) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-first-order-specs-curve)
 
-*rise_time (10-90 % rise time) against tau (time constant in seconds) from 1 to 3. Outputs with the same unit drawn together: time_constant (time constant (63.2 % of the final value)), settling_time_2 (2 % settling time), settling_time_5 (5 % settling time). Other inputs as in the worked example: K = 3. 31 points computed by control-systems-ai999x; marked: the worked example, tau = 2, rise_time = 4.39445 s.*
+*rise_time (10-90 % rise time) against tau (time constant in seconds) from 1 to 3. Outputs with the same unit drawn together: time_constant (time constant (63.2 % of the final value)), settling_time_2 (2 % settling time), settling_time_5 (5 % settling time). Other inputs as in the worked example: K = 3.0. 31 points computed by control-systems-ai999x; marked: the worked example, tau = 2, rise_time = 4.39445 s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_first_order_specs', K=3, tau=2)
@@ -344,7 +344,7 @@ $$
 
 ![magnitude (gain |G(jw)|) against tau (time constant in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-first-order-freq-curve)
 
-*magnitude (gain |G(jw)|) against tau (time constant in seconds) from 0.1 to 10 on a logarithmic axis. One curve for each value of K (DC gain (positive)): 10, 5, 20. Other inputs as in the worked example: w = 1. 41 points per curve computed by control-systems-ai999x; marked: the worked example, tau = 1, magnitude = 7.07107.*
+*magnitude (gain |G(jw)|) against tau (time constant in seconds) from 0.1 to 10 on a logarithmic axis. One curve for each value of K (DC gain (positive)): 10, 5, 20. Other inputs as in the worked example: w = 1.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, tau = 1, magnitude = 7.07107.*
 
 ```python
 control_systems_ai999x.solve('ctrl_first_order_freq', K=10, tau=1, w=1)
@@ -396,11 +396,11 @@ $$
 
 ![damping class (damping) over m (mass in kg) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-mass-spring-damper-decision)
 
-*damping class (damping) over m (mass in kg) from 0.1 to 10 and c (damping coefficient in N*s/m) from 0.2 to 20 (logarithmic axes): each of the 31 × 21 cells is one run of control-systems-ai999x, coloured by the verdict it returned, overdamped: 227 cells, underdamped: 424 cells. Other inputs as in the worked example: k = 4. Marked: the worked example, m = 1, c = 2 → underdamped.*
+*damping class (damping) over m (mass in kg) from 0.1 to 10 and c (damping coefficient in N*s/m) from 0.2 to 20 (logarithmic axes): each of the 31 × 21 cells is one run of control-systems-ai999x, coloured by the verdict it returned, overdamped: 227 cells, underdamped: 424 cells. Other inputs as in the worked example: k = 4.0. Marked: the worked example, m = 1, c = 2 → underdamped.*
 
 ![wn (undamped natural frequency) against m (mass in kg) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-mass-spring-damper-curve)
 
-*wn (undamped natural frequency) against m (mass in kg) from 0.5 to 1.5. One curve for each value of k (spring stiffness in N/m): 4, 2, 8. Other inputs as in the worked example: c = 2. 31 points per curve computed by control-systems-ai999x; marked: the worked example, m = 1, wn = 2 rad/s.*
+*wn (undamped natural frequency) against m (mass in kg) from 0.5 to 1.5. One curve for each value of k (spring stiffness in N/m): 4, 2, 8. Other inputs as in the worked example: c = 2.0. 31 points per curve computed by control-systems-ai999x; marked: the worked example, m = 1, wn = 2 rad/s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_mass_spring_damper', m=1, c=2, k=4)
@@ -923,7 +923,7 @@ $$
 
 ![z_mag (|z| = e^{s_re T}) against T (sampling period in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-s-to-z-pole-curve)
 
-*z_mag (|z| = e^{s_re T}) against T (sampling period in seconds) from 0.01 to 1 on a logarithmic axis. One curve for each value of s_re (real part of the s-plane pole (1/s)): -2, -1, -4. Other inputs as in the worked example: s_im = 0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, T = 0.1, z_mag = 0.818731.*
+*z_mag (|z| = e^{s_re T}) against T (sampling period in seconds) from 0.01 to 1 on a logarithmic axis. One curve for each value of s_re (real part of the s-plane pole (1/s)): -2, -1, -4. Other inputs as in the worked example: s_im = 0.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, T = 0.1, z_mag = 0.818731.*
 
 ```python
 control_systems_ai999x.solve('ctrl_s_to_z_pole', s_re=-2, s_im=0, T=0.1)
@@ -975,7 +975,7 @@ $$
 
 ![Kp (proportional gain) against Ku (ultimate gain (gain at sustained oscillation)) from 5 to 15](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-zn-ultimate-curve)
 
-*Kp (proportional gain) against Ku (ultimate gain (gain at sustained oscillation)) from 5 to 15. One curve for each value of controller (controller type): PID, P, PI. Other inputs as in the worked example: Pu = 4. 31 points per curve computed by control-systems-ai999x; marked: the worked example, Ku = 10, Kp = 6.*
+*Kp (proportional gain) against Ku (ultimate gain (gain at sustained oscillation)) from 5 to 15. One curve for each value of controller (controller type): PID, P, PI. Other inputs as in the worked example: Pu = 4.0. 31 points per curve computed by control-systems-ai999x; marked: the worked example, Ku = 10, Kp = 6.*
 
 ```python
 control_systems_ai999x.solve('ctrl_zn_ultimate', Ku=10, Pu=4, controller='PID')
@@ -1033,7 +1033,7 @@ $$
 
 ![Kp (proportional gain) against K (process gain) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-zn-reaction-curve)
 
-*Kp (proportional gain) against K (process gain) from 1 to 3. One curve for each value of L (apparent dead time in seconds): 1, 0.5, 2. Other inputs as in the worked example: T = 10, controller = PID. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Kp = 6.*
+*Kp (proportional gain) against K (process gain) from 1 to 3. One curve for each value of L (apparent dead time in seconds): 1, 0.5, 2. Other inputs as in the worked example: T = 10.0, controller = PID. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Kp = 6.*
 
 ```python
 control_systems_ai999x.solve('ctrl_zn_reaction', K=2, L=1, T=10, controller='PID')
@@ -1130,7 +1130,7 @@ $$
 
 ![Ti (integral time) against Ki (integral gain (> 0)) from 1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pid-parallel-to-standard-curve)
 
-*Ti (integral time) against Ki (integral gain (> 0)) from 1.5 to 4.5. One curve for each value of Kp (proportional gain (> 0)): 6, 3, 12. Other inputs as in the worked example: Kd = 3. 31 points per curve computed by control-systems-ai999x; marked: the worked example, Ki = 3, Ti = 2 s.*
+*Ti (integral time) against Ki (integral gain (> 0)) from 1.5 to 4.5. One curve for each value of Kp (proportional gain (> 0)): 6, 3, 12. Other inputs as in the worked example: Kd = 3.0. 31 points per curve computed by control-systems-ai999x; marked: the worked example, Ki = 3, Ti = 2 s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_pid_parallel_to_standard', Kp=6, Ki=3, Kd=3)
@@ -1804,7 +1804,7 @@ $$
 
 ![magnitude (|G(jw)|) against zeta (damping ratio) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-second-order-freq-curve)
 
-*magnitude (|G(jw)|) against zeta (damping ratio) from 0.02 to 0.98. One curve for each value of wn (natural frequency in rad/s): 10, 5, 20. Other inputs as in the worked example: w = 10. 41 points per curve computed by control-systems-ai999x; marked: the worked example, zeta = 0.5, magnitude = 1.*
+*magnitude (|G(jw)|) against zeta (damping ratio) from 0.02 to 0.98. One curve for each value of wn (natural frequency in rad/s): 10, 5, 20. Other inputs as in the worked example: w = 10.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, zeta = 0.5, magnitude = 1.*
 
 ```python
 control_systems_ai999x.solve('ctrl_second_order_freq', zeta=0.5, wn=10, w=10)
@@ -1904,7 +1904,7 @@ $$
 
 ![Mr (resonant peak (ratio)) against zeta (damping ratio (0 < zeta < 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-resonant-peak-curve)
 
-*Mr (resonant peak (ratio)) against zeta (damping ratio (0 < zeta < 0.7071)) from 0.02 to 0.98. Other inputs as in the worked example: wn = 10. 29 points computed by control-systems-ai999x; marked: the worked example, zeta = 0.5, Mr = 1.1547.*
+*Mr (resonant peak (ratio)) against zeta (damping ratio (0 < zeta < 0.7071)) from 0.02 to 0.98. Other inputs as in the worked example: wn = 10.0. 29 points computed by control-systems-ai999x; marked: the worked example, zeta = 0.5, Mr = 1.1547.*
 
 ```python
 control_systems_ai999x.solve('ctrl_resonant_peak', zeta=0.5, wn=10)
@@ -2418,7 +2418,7 @@ $$
 
 ![a (discrete pole a) against tau (time constant in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-zoh-first-order-curve)
 
-*a (discrete pole a) against tau (time constant in seconds) from 0.1 to 10 on a logarithmic axis. One curve for each value of T (sampling period in seconds): 0.5, 0.25, 1. Other inputs as in the worked example: K = 2. 41 points per curve computed by control-systems-ai999x; marked: the worked example, tau = 1, a = 0.606531.*
+*a (discrete pole a) against tau (time constant in seconds) from 0.1 to 10 on a logarithmic axis. One curve for each value of T (sampling period in seconds): 0.5, 0.25, 1. Other inputs as in the worked example: K = 2.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, tau = 1, a = 0.606531.*
 
 ```python
 control_systems_ai999x.solve('ctrl_zoh_first_order', K=2, tau=1, T=0.5)
@@ -2669,7 +2669,7 @@ $$
 
 ![q0 (coefficient of e[k]) against T (sampling period in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-discrete-pid-curve)
 
-*q0 (coefficient of e[k]) against T (sampling period in seconds) from 0.01 to 1 on a logarithmic axis. One curve for each value of Kd (derivative gain): 0.5, 0.25, 1. Other inputs as in the worked example: Kp = 2, Ki = 1. 41 points per curve computed by control-systems-ai999x; marked: the worked example, T = 0.1, q0 = 7.1.*
+*q0 (coefficient of e[k]) against T (sampling period in seconds) from 0.01 to 1 on a logarithmic axis. One curve for each value of Kd (derivative gain): 0.5, 0.25, 1. Other inputs as in the worked example: Kp = 2.0, Ki = 1.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, T = 0.1, q0 = 7.1.*
 
 ```python
 control_systems_ai999x.solve('ctrl_discrete_pid', Kp=2, Ki=1, Kd=0.5, T=0.1)
@@ -2720,7 +2720,7 @@ $$
 
 ![wn (natural frequency) against z_re (real part of the discrete pole) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-z-to-s-pole-curve)
 
-*wn (natural frequency) against z_re (real part of the discrete pole) from 0.05 to 5 on a logarithmic axis. One curve for each value of T (sampling period in seconds): 0.1, 0.05, 0.2. Other inputs as in the worked example: z_im = 0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, z_re = 0.5, wn = 6.93147 rad/s.*
+*wn (natural frequency) against z_re (real part of the discrete pole) from 0.05 to 5 on a logarithmic axis. One curve for each value of T (sampling period in seconds): 0.1, 0.05, 0.2. Other inputs as in the worked example: z_im = 0.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, z_re = 0.5, wn = 6.93147 rad/s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_z_to_s_pole', z_re=0.5, z_im=0, T=0.1)
@@ -2773,7 +2773,7 @@ $$
 
 ![Kp (proportional gain) against K (process gain) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-cohen-coon-curve)
 
-*Kp (proportional gain) against K (process gain) from 1 to 3. One curve for each value of tau (time constant in seconds): 10, 5, 20. Other inputs as in the worked example: theta = 2, controller = PID. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Kp = 3.45833.*
+*Kp (proportional gain) against K (process gain) from 1 to 3. One curve for each value of tau (time constant in seconds): 10, 5, 20. Other inputs as in the worked example: theta = 2.0, controller = PID. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Kp = 3.45833.*
 
 ```python
 control_systems_ai999x.solve('ctrl_cohen_coon', K=2, tau=10, theta=2, controller='PID')
@@ -2824,7 +2824,7 @@ $$
 
 ![Kp (proportional gain) against K (process gain) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-simc-pi-curve)
 
-*Kp (proportional gain) against K (process gain) from 1 to 3. One curve for each value of tau (time constant in seconds): 10, 5, 20. Other inputs as in the worked example: theta = 1. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Kp = 2.5.*
+*Kp (proportional gain) against K (process gain) from 1 to 3. One curve for each value of tau (time constant in seconds): 10, 5, 20. Other inputs as in the worked example: theta = 1.0. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Kp = 2.5.*
 
 ```python
 control_systems_ai999x.solve('ctrl_simc_pi', K=2, tau=10, theta=1)
@@ -2877,11 +2877,11 @@ $$
 
 ![The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: poles = (-3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pid-closed-loop-vectors)
 
-*The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: poles = (-3.41421, -0.585786); also returned max_real_part = -0.585786. Other inputs: num = [1], Kp = 3, Ki = 2. Marked: the tip of each returned vector.*
+*The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: poles = (-3.41421, -0.585786); also returned max_real_part = -0.585786. Other inputs: num = [1], Kp = 3.0, Ki = 2.0. Marked: the tip of each returned vector.*
 
-![closed-loop poles (poles) returned by control-systems-ai999x for the worked example (num = [1], den = [1, 1], Kp = 3, Ki = 2), drawn in the complex plane: -3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pid-closed-loop-complex)
+![closed-loop poles (poles) returned by control-systems-ai999x for the worked example (num = [1], den = [1, 1], Kp = 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pid-closed-loop-complex)
 
-*closed-loop poles (poles) returned by control-systems-ai999x for the worked example (num = [1], den = [1, 1], Kp = 3, Ki = 2), drawn in the complex plane: -3.41421 + 0i, -0.585786 + 0i.*
+*closed-loop poles (poles) returned by control-systems-ai999x for the worked example (num = [1], den = [1, 1], Kp = 3.0, Ki = 2.0), drawn in the complex plane: -3.41421 + 0i, -0.585786 + 0i.*
 
 ```python
 control_systems_ai999x.solve('ctrl_pid_closed_loop', num=[1], den=[1, 1], Kp=3, Ki=2)
@@ -2990,7 +2990,7 @@ $$
 
 ![s^2 + 2 sigma s + wn^2 (char_poly) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 16, largest 16)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-specs-to-poles-series)
 
-*s^2 + 2 sigma s + wn^2 (char_poly) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 16, largest 16). Inputs: OS = 0.163033534821, Ts = 2.*
+*s^2 + 2 sigma s + wn^2 (char_poly) returned by control-systems-ai999x for the worked example, one value for each position in the list (3 values, first 1, last 16, largest 16). Inputs: OS = 0.163033534821, Ts = 2.0.*
 
 ![wn (natural frequency) against OS (maximum overshoot (write 10% or 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-specs-to-poles-curve)
 
@@ -3095,7 +3095,7 @@ $$
 
 ![wn (natural frequency) against y_peak (peak value of the response) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-identify-second-order-curve)
 
-*wn (natural frequency) against y_peak (peak value of the response) from 0.581517 to 1.74455. One curve for each value of t_peak (time of the peak in seconds): 0.9069, 0.45345, 1.8138. Other inputs as in the worked example: y_final = 1. 20 points per curve computed by control-systems-ai999x; marked: the worked example, y_peak = 1.16303, wn = 4 rad/s.*
+*wn (natural frequency) against y_peak (peak value of the response) from 0.581517 to 1.74455. One curve for each value of t_peak (time of the peak in seconds): 0.9069, 0.45345, 1.8138. Other inputs as in the worked example: y_final = 1.0. 20 points per curve computed by control-systems-ai999x; marked: the worked example, y_peak = 1.16303, wn = 4 rad/s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_identify_second_order', y_peak=1.163033534821, y_final=1, t_peak=0.906899682118)
@@ -3145,7 +3145,7 @@ $$
 
 ![y (output at time t) against theta (dead time in seconds) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-fopdt-step-curve)
 
-*y (output at time t) against theta (dead time in seconds) from 0.1 to 10 on a logarithmic axis. One curve for each value of K (process gain): 2, 1, 4. Other inputs as in the worked example: tau = 5, t = 6. 41 points per curve computed by control-systems-ai999x; marked: the worked example, theta = 1, y = 1.26424.*
+*y (output at time t) against theta (dead time in seconds) from 0.1 to 10 on a logarithmic axis. One curve for each value of K (process gain): 2, 1, 4. Other inputs as in the worked example: tau = 5.0, t = 6.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, theta = 1, y = 1.26424.*
 
 ```python
 control_systems_ai999x.solve('ctrl_fopdt_step', K=2, tau=5, theta=1, t=6)
@@ -3200,7 +3200,7 @@ $$
 
 ![x_post (updated estimate) against a (state transition coefficient) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-kalman-scalar-step-curve)
 
-*x_post (updated estimate) against a (state transition coefficient) from 0.1 to 10 on a logarithmic axis. One curve for each value of z (new measurement): 4, 2, 8. Other inputs as in the worked example: x = 0, P = 1, q = 1, r = 2. 41 points per curve computed by control-systems-ai999x; marked: the worked example, a = 1, x_post = 2.*
+*x_post (updated estimate) against a (state transition coefficient) from 0.1 to 10 on a logarithmic axis. One curve for each value of z (new measurement): 4, 2, 8. Other inputs as in the worked example: x = 0.0, P = 1.0, q = 1.0, r = 2.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, a = 1, x_post = 2.*
 
 ```python
 control_systems_ai999x.solve('ctrl_kalman_scalar_step', x=0, P=1, a=1, q=1, r=2, z=4)
@@ -3253,7 +3253,7 @@ $$
 
 ![poles (poles) returned by control-systems-ai999x for the worked example (J = 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-dc-motor-complex)
 
-*poles (poles) returned by control-systems-ai999x for the worked example (J = 0.01, b = 0.1, Kt = 0.01, R = 1, L = 0.5), drawn in the complex plane: -9.9975 + 0i, -2.0025 + 0i.*
+*poles (poles) returned by control-systems-ai999x for the worked example (J = 0.01, b = 0.1, Kt = 0.01, R = 1.0, L = 0.5), drawn in the complex plane: -9.9975 + 0i, -2.0025 + 0i.*
 
 ![dc_gain (speed per volt at steady state (rad/s per V)) against b (viscous friction in N*m*s) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-dc-motor-curve)
 
@@ -3796,7 +3796,7 @@ $$
 
 ![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Phi (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-state-transition-matrix)
 
-*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Phi (returned). Other inputs: t = 2.*
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); Phi (returned). Other inputs: t = 2.0.*
 
 ```python
 control_systems_ai999x.solve('ctrl_state_transition', A=[[0, 1], [0, 0]], t=2)
@@ -3846,11 +3846,11 @@ $$
 
 ![The plane vectors of the worked example as arrows from the origin: input B = (0, 1), x0 = (0, 0); returned by control-systems-ai999x: x = (9, 6)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ss-response-vectors)
 
-*The plane vectors of the worked example as arrows from the origin: input B = (0, 1), x0 = (0, 0); returned by control-systems-ai999x: x = (9, 6). Other inputs: A = [[0, 1], [0, 0]], u = 2, t = 3. Marked: the tip of each returned vector.*
+*The plane vectors of the worked example as arrows from the origin: input B = (0, 1), x0 = (0, 0); returned by control-systems-ai999x: x = (9, 6). Other inputs: A = [[0, 1], [0, 0]], u = 2.0, t = 3.0. Marked: the tip of each returned vector.*
 
 ![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); x (returned)](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-ss-response-matrix)
 
-*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); x (returned). Other inputs: B = [0, 1], x0 = [0, 0], u = 2, t = 3.*
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); x (returned). Other inputs: B = [0, 1], x0 = [0, 0], u = 2.0, t = 3.0.*
 
 ```python
 control_systems_ai999x.solve('ctrl_ss_response', A=[[0, 1], [0, 0]], B=[0, 1], x0=[0, 0], u=2, t=3)
@@ -3952,7 +3952,7 @@ $$
 
 ![The plane vectors of the worked example as arrows from the origin: input den = (1, 0); returned by control-systems-ai999x: numz = (0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-c2d-foh-vectors)
 
-*The plane vectors of the worked example as arrows from the origin: input den = (1, 0); returned by control-systems-ai999x: numz = (0.5, 0.5), denz = (1, -1). Other inputs: num = [1], T = 1. Marked: the tip of each returned vector.*
+*The plane vectors of the worked example as arrows from the origin: input den = (1, 0); returned by control-systems-ai999x: numz = (0.5, 0.5), denz = (1, -1). Other inputs: num = [1], T = 1.0. Marked: the tip of each returned vector.*
 
 ```python
 control_systems_ai999x.solve('ctrl_c2d_foh', num=[1], den=[1, 0], T=1)
@@ -4002,7 +4002,7 @@ $$
 
 ![The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-tustin-prewarp-vectors)
 
-*The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0.353296, 0.353296), denz = (1, -0.293408). Other inputs: num = [1], T = 1, w = 1. Marked: the tip of each returned vector.*
+*The plane vectors of the worked example as arrows from the origin: input den = (1, 1); returned by control-systems-ai999x: numz = (0.353296, 0.353296), denz = (1, -0.293408). Other inputs: num = [1], T = 1.0, w = 1.0. Marked: the tip of each returned vector.*
 
 ```python
 control_systems_ai999x.solve('ctrl_tustin_prewarp', num=[1], den=[1, 1], T=1, w=1)
@@ -4257,7 +4257,7 @@ $$
 
 ![alpha (alpha (pole/zero ratio z/p)) against phi_max_deg (required maximum phase lead in degrees (0 to 90)) from 0 to 90](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lead-design-curve)
 
-*alpha (alpha (pole/zero ratio z/p)) against phi_max_deg (required maximum phase lead in degrees (0 to 90)) from 0 to 90. Other inputs as in the worked example: w_m = 1. 39 points computed by control-systems-ai999x; marked: the worked example, phi_max_deg = 30, alpha = 0.333333.*
+*alpha (alpha (pole/zero ratio z/p)) against phi_max_deg (required maximum phase lead in degrees (0 to 90)) from 0 to 90. Other inputs as in the worked example: w_m = 1.0. 39 points computed by control-systems-ai999x; marked: the worked example, phi_max_deg = 30, alpha = 0.333333.*
 
 ```python
 control_systems_ai999x.solve('ctrl_lead_design', phi_max_deg=30, w_m=1)
@@ -4313,7 +4313,7 @@ $$
 
 ![phase_deg (phase added at w_c in degrees (negative)) against beta (required low-frequency gain increase (> 1)) from 1 to 100 on a logarithmic axis](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lag-design-curve)
 
-*phase_deg (phase added at w_c in degrees (negative)) against beta (required low-frequency gain increase (> 1)) from 1 to 100 on a logarithmic axis. Other inputs as in the worked example: w_c = 1. 40 points computed by control-systems-ai999x; marked: the worked example, beta = 10, phase_deg = -5.13765.*
+*phase_deg (phase added at w_c in degrees (negative)) against beta (required low-frequency gain increase (> 1)) from 1 to 100 on a logarithmic axis. Other inputs as in the worked example: w_c = 1.0. 40 points computed by control-systems-ai999x; marked: the worked example, beta = 10, phase_deg = -5.13765.*
 
 ```python
 control_systems_ai999x.solve('ctrl_lag_design', beta=10, w_c=1)
@@ -4359,9 +4359,9 @@ $$
 - **Assumes:** $\theta > 0$; $1  \leq  n  \leq  6$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![denominator coefficients (leading 1) (den) at each numerator coefficients (num), both returned by control-systems-ai999x for the worked example (theta = 2, n = 1): -1 → 1; 1 → 1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pade-series)
+![denominator coefficients (leading 1) (den) at each numerator coefficients (num), both returned by control-systems-ai999x for the worked example (theta = 2](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pade-series)
 
-*denominator coefficients (leading 1) (den) at each numerator coefficients (num), both returned by control-systems-ai999x for the worked example (theta = 2, n = 1): -1 → 1; 1 → 1.*
+*denominator coefficients (leading 1) (den) at each numerator coefficients (num), both returned by control-systems-ai999x for the worked example (theta = 2.0, n = 1): -1 → 1; 1 → 1.*
 
 ```python
 control_systems_ai999x.solve('ctrl_pade', theta=2, n=1)
@@ -4412,7 +4412,7 @@ $$
 
 ![K (optimal feedback gain) against a (system coefficient) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-scalar-lqr-curve)
 
-*K (optimal feedback gain) against a (system coefficient) from 0.1 to 10 on a logarithmic axis. One curve for each value of b (input coefficient): 1, 0.5, 2. Other inputs as in the worked example: q = 3, r = 1. 41 points per curve computed by control-systems-ai999x; marked: the worked example, a = 1, K = 3.*
+*K (optimal feedback gain) against a (system coefficient) from 0.1 to 10 on a logarithmic axis. One curve for each value of b (input coefficient): 1, 0.5, 2. Other inputs as in the worked example: q = 3.0, r = 1.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, a = 1, K = 3.*
 
 ```python
 control_systems_ai999x.solve('ctrl_scalar_lqr', a=1, b=1, q=3, r=1)
@@ -4462,7 +4462,7 @@ $$
 
 ![Ki (integral gain) against K (plant gain) from 1 to 3](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-pi-pole-placement-curve)
 
-*Ki (integral gain) against K (plant gain) from 1 to 3. One curve for each value of wn (desired natural frequency in rad/s): 1, 0.5, 2. Other inputs as in the worked example: tau = 5, zeta = 0.7. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Ki = 2.5.*
+*Ki (integral gain) against K (plant gain) from 1 to 3. One curve for each value of wn (desired natural frequency in rad/s): 1, 0.5, 2. Other inputs as in the worked example: tau = 5.0, zeta = 0.7. 31 points per curve computed by control-systems-ai999x; marked: the worked example, K = 2, Ki = 2.5.*
 
 ```python
 control_systems_ai999x.solve('ctrl_pi_pole_placement', K=2, tau=5, zeta=0.7, wn=1)
@@ -4513,7 +4513,7 @@ $$
 
 ![gain (steady Kalman gain) against a (state transition coefficient) from 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-kalman-scalar-steady-curve)
 
-*gain (steady Kalman gain) against a (state transition coefficient) from 0.1 to 10 on a logarithmic axis. One curve for each value of c (measurement coefficient): 1, 0.5, 2. Other inputs as in the worked example: q = 1, r = 1. 41 points per curve computed by control-systems-ai999x; marked: the worked example, a = 1, gain = 0.618034.*
+*gain (steady Kalman gain) against a (state transition coefficient) from 0.1 to 10 on a logarithmic axis. One curve for each value of c (measurement coefficient): 1, 0.5, 2. Other inputs as in the worked example: q = 1.0, r = 1.0. 41 points per curve computed by control-systems-ai999x; marked: the worked example, a = 1, gain = 0.618034.*
 
 ```python
 control_systems_ai999x.solve('ctrl_kalman_scalar_steady', a=1, c=1, q=1, r=1)
@@ -4564,7 +4564,7 @@ $$
 
 ![tau (time constant) against t63 (time to 63](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-fopdt-smith-curve)
 
-*tau (time constant) against t63 (time to 63.2 % of the change (s)) from 5 to 15. One curve for each value of t28 (time to 28.3 % of the change (s)): 4, 8. Other inputs as in the worked example: dy = 6, du = 2. 22 points per curve computed by control-systems-ai999x; marked: the worked example, t63 = 10, tau = 9 s.*
+*tau (time constant) against t63 (time to 63.2 % of the change (s)) from 5 to 15. One curve for each value of t28 (time to 28.3 % of the change (s)): 4, 8. Other inputs as in the worked example: dy = 6.0, du = 2.0. 22 points per curve computed by control-systems-ai999x; marked: the worked example, t63 = 10, tau = 9 s.*
 
 ```python
 control_systems_ai999x.solve('ctrl_fopdt_smith', t28=4, t63=10, dy=6, du=2)
@@ -4615,11 +4615,11 @@ $$
 
 ![The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (1, 1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lqr-vectors)
 
-*The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (1, 1.73205). Other inputs: A = [[0, 1], [0, 0]], Q = [[1, 0], [0, 1]], R = 1. Marked: the tip of each returned vector.*
+*The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (1, 1.73205). Other inputs: A = [[0, 1], [0, 0]], Q = [[1, 0], [0, 1]], R = 1.0. Marked: the tip of each returned vector.*
 
-![closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1), drawn in the complex plane: -0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lqr-complex)
+![closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-lqr-complex)
 
-*closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1), drawn in the complex plane: -0.866025 − 0.5i, -0.866025 + 0.5i.*
+*closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1.0), drawn in the complex plane: -0.866025 − 0.5i, -0.866025 + 0.5i.*
 
 ```python
 control_systems_ai999x.solve('ctrl_lqr', A=[[0, 1], [0, 0]], B=[0, 1], Q=[[1, 0], [0, 1]], R=1)
@@ -4670,11 +4670,11 @@ $$
 
 ![The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-dlqr-vectors)
 
-*The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (0.422082, 1.24393). Other inputs: A = [[1, 1], [0, 1]], Q = [[1, 0], [0, 1]], R = 1. Marked: the tip of each returned vector.*
+*The plane vectors of the worked example as arrows from the origin: input B = (0, 1); returned by control-systems-ai999x: K = (0.422082, 1.24393). Other inputs: A = [[1, 1], [0, 1]], Q = [[1, 0], [0, 1]], R = 1.0. Marked: the tip of each returned vector.*
 
-![closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[1, 1], [0, 1]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1), drawn in the complex plane: 0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-dlqr-complex)
+![closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[1, 1], [0, 1]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-dlqr-complex)
 
-*closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[1, 1], [0, 1]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1), drawn in the complex plane: 0.378036 − 0.18773i, 0.378036 + 0.18773i.*
+*closed-loop poles (poles) returned by control-systems-ai999x for the worked example (A = [[1, 1], [0, 1]], B = [0, 1], Q = [[1, 0], [0, 1]], R = 1.0), drawn in the complex plane: 0.378036 − 0.18773i, 0.378036 + 0.18773i.*
 
 ```python
 control_systems_ai999x.solve('ctrl_dlqr', A=[[1, 1], [0, 1]], B=[0, 1], Q=[[1, 0], [0, 1]], R=1)
@@ -4725,11 +4725,11 @@ $$
 
 ![The plane vectors of the worked example as arrows from the origin: input C = (1, 0); returned by control-systems-ai999x: L = (1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-kalman-bucy-vectors)
 
-*The plane vectors of the worked example as arrows from the origin: input C = (1, 0); returned by control-systems-ai999x: L = (1.73205, 1). Other inputs: A = [[0, 1], [0, 0]], W = [[1, 0], [0, 1]], V = 1. Marked: the tip of each returned vector.*
+*The plane vectors of the worked example as arrows from the origin: input C = (1, 0); returned by control-systems-ai999x: L = (1.73205, 1). Other inputs: A = [[0, 1], [0, 0]], W = [[1, 0], [0, 1]], V = 1.0. Marked: the tip of each returned vector.*
 
-![estimator poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], C = [1, 0], W = [[1, 0], [0, 1]], V = 1), drawn in the complex plane: -0](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-kalman-bucy-complex)
+![estimator poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], C = [1, 0], W = [[1, 0], [0, 1]], V = 1](https://www.ai999x.com/?ax_fig=control-systems-ai999x/ctrl-kalman-bucy-complex)
 
-*estimator poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], C = [1, 0], W = [[1, 0], [0, 1]], V = 1), drawn in the complex plane: -0.866025 − 0.5i, -0.866025 + 0.5i.*
+*estimator poles (poles) returned by control-systems-ai999x for the worked example (A = [[0, 1], [0, 0]], C = [1, 0], W = [[1, 0], [0, 1]], V = 1.0), drawn in the complex plane: -0.866025 − 0.5i, -0.866025 + 0.5i.*
 
 ```python
 control_systems_ai999x.solve('ctrl_kalman_bucy', A=[[0, 1], [0, 0]], C=[1, 0], W=[[1, 0], [0, 1]], V=1)
