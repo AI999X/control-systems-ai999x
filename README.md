@@ -10,34 +10,122 @@ Control Systems covers transfer functions, poles and zeros, step and frequency r
 
 | | |
 |---|---|
-| **Desktop app** (Windows, Linux) | [Windows](https://downloads.ai999x.com/desktop/latest/ai999x-windows-x86_64.zip) · [Linux](https://downloads.ai999x.com/desktop/latest/ai999x-linux-x86_64.tar.gz) |
-| **Command line** `control-systems` (Windows, Linux) | [Windows](https://downloads.ai999x.com/desktop/latest/ai999x-cli-windows-x86_64.zip) · [Linux](https://downloads.ai999x.com/desktop/latest/ai999x-cli-linux-x86_64.tar.gz) |
+| **Desktop app** (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.4/ai999x-1.6.4-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.4/ai999x-1.6.4-linux-x86_64.tar.gz) |
+| **Command line** `control-systems` (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.4/ai999x-cli-1.6.4-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.4/ai999x-cli-1.6.4-linux-x86_64.tar.gz) |
 | **Browser** (any device) | [Try it on the model page](https://www.ai999x.com/models/control-systems-ai999x/#try) |
 | **Python** 3.10+ | `pip install control-systems-ai999x`: on Windows and Linux (x86-64) `pip` installs the same compiled engine; on other systems (macOS, ARM) it installs a pure-Python build that gives the same answers |
 
-## Example
+## Ask in words: 15 examples
+
+Each question below was asked on this release; the comment under it is the line it printed.
 
 ```python
 import control_systems_ai999x as control_systems
-a = control_systems.ask("stability margins: num = [10], den = [1, 3, 2, 0]")
-print(a.outcome, a.value)
+
+a = control_systems.ask("bandwidth: num = [1], den = [1, 1]")
+print(a.outcome, a.values)
+# SOLVED {'wb': 1.0, 'dc_gain': 1.0}
+
+a = control_systems.ask(
+    "logarithmic decrement: x1 = 1, xn = 0.5, n = 1"
+)
+print(a.outcome, a.values)
+# SOLVED {'delta': 0.69314718056, 'zeta': 0.109652580999}
+
+a = control_systems.ask(
+    "steady-state error: num = [10], den = [1, 3, 2], input = step"
+)
+print(a.outcome, a.values)
+# SOLVED {'system_type': 0, 'K_static': 5.0, 'ess': 0.166666666667}
+
+a = control_systems.ask("damping ratio from overshoot: OS = 0.2")
+print(a.outcome, a.values)
+# SOLVED {'zeta': 0.455949810769, 'pole_angle_deg': 62.8739366084}
+
+a = control_systems.ask(
+    "Smith FOPDT fit: t28 = 4, t63 = 10, dy = 6, du = 2"
+)
+print(a.outcome, a.values)
+# SOLVED {'K': 3.0, 'tau': 9.0, 'theta': 1.0}
+
+a = control_systems.ask("exact settling time: zeta = 0.5, wn = 1")
+print(a.outcome, a.values)
+# SOLVED {'Ts': 8.07634897393, 'last_extremum': 2}
+
+a = control_systems.ask("DC gain: num = [10], den = [1, 3, 2]")
+print(a.outcome, a.values)
+# SOLVED {'dc_gain': 5.0, 'final_value': 5.0}
+
+a = control_systems.ask(
+    "discrete DC gain: num = [0.5], den = [1, -0.5]"
+)
+print(a.outcome, a.values)
+# SOLVED {'dc_gain': 1.0, 'final_value': 1.0}
+
+a = control_systems.ask("scalar LQR: a = 1, b = 1, q = 3, r = 1")
+print(a.outcome, a.values)
+# SOLVED {'P': 3.0, 'K': 3.0, 'pole': -2.0}
+
+a = control_systems.ask(
+    "PI pole placement: K = 2, tau = 5, zeta = 0.7, wn = 1"
+)
+print(a.outcome, a.values)
+# SOLVED {'Kp': 3.0, 'Ki': 2.5}
+
+a = control_systems.ask(
+    "final value theorem: num = [10], den = [1, 3, 2, 0]"
+)
+print(a.outcome, a.values)
+# SOLVED {'final_value': 5.0}
+
+a = control_systems.ask(
+    "discrete PID: Kp = 2, Ki = 1, Kd = 0.5, T = 0.1"
+)
+print(a.outcome, a.values)
+# SOLVED {'q0': 7.1, 'q1': -12.0, 'q2': 5.0}
+
+a = control_systems.ask(
+    "PID parallel to standard: Kp = 6, Ki = 3, Kd = 3"
+)
+print(a.outcome, a.values)
+# SOLVED {'Ti': 2.0, 'Td': 0.5}
+
+a = control_systems.ask("Jury test: coefficients = [1, -1.2, 0.35]")
+print(a.outcome, a.values)
+# SOLVED {'stable': True, 'P1': 0.15, 'Pm1': 2.55}
+
+a = control_systems.ask(
+    "initial value theorem: num = [2, 3], den = [1, 5, 6]"
+)
+print(a.outcome, a.values)
+# SOLVED {'y0': 2.0, 'dy0': -7.0}
 ```
 
-Output:
+## Screenshots
 
-```text
-SOLVED -12.9972080155
-```
+[![The Control Systems desktop app: Rise time of an underdamped second-order system, with its worked example and live scene](https://www.ai999x.com/?ax_shot=control-systems-ai999x/hero-dark.webp)](https://www.ai999x.com/models/control-systems-ai999x/)
+
+[![Controllability matrix and rank: the live scene in the Control Systems desktop app](https://www.ai999x.com/?ax_shot=control-systems-ai999x/see-1.webp)](https://www.ai999x.com/models/control-systems-ai999x/)
+
+*Controllability matrix and rank*
+
+[![Mapping an s-plane pole to the z-plane (z = e^{sT}): the live scene in the Control Systems desktop app](https://www.ai999x.com/?ax_shot=control-systems-ai999x/see-2.webp)](https://www.ai999x.com/models/control-systems-ai999x/)
+
+*Mapping an s-plane pole to the z-plane (z = e^{sT})*
+
+[![Range of gain for closed-loop stability (Routh, j-omega crossing): the live scene in the Control Systems desktop app](https://www.ai999x.com/?ax_shot=control-systems-ai999x/see-3.webp)](https://www.ai999x.com/models/control-systems-ai999x/)
+
+*Range of gain for closed-loop stability (Routh, j-omega crossing)*
 
 Every calculation, with its formula, a worked example and its figures: **[Control Systems on ai999x.com](https://www.ai999x.com/models/control-systems-ai999x/)**. Install guides for the app and the command line: [https://www.ai999x.com/desktop-cli/](https://www.ai999x.com/desktop-cli/).
 
-Version 1.6.3 · License: Apache-2.0 · Author: Ibnul Jaif Farabi · Organization: AI999X · Contact: support@ai999x.com · [Support the project](https://buymeacoffee.com/ibnuljaiffarabi)
+Version 1.6.4 · License: Apache-2.0 · Author: Ibnul Jaif Farabi · Organization: AI999X · Contact: support@ai999x.com · [Support the project](https://buymeacoffee.com/ibnuljaiffarabi)
 
 *The Future Is Self-Improving.*
 
 ## Source and releases
 
-This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/control-systems-ai999x/) (`pip install .` builds it). Releases are tagged `v1.6.3`; the [GitHub release](https://github.com/AI999X/control-systems-ai999x/releases/tag/v1.6.3) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
+This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/control-systems-ai999x/) (`pip install .` builds it). Releases are tagged `v1.6.4`; the [GitHub release](https://github.com/AI999X/control-systems-ai999x/releases/tag/v1.6.4) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
 
 ## Build the program from source
 
