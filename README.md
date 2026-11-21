@@ -10,8 +10,8 @@ Control Systems covers transfer functions, poles and zeros, step and frequency r
 
 | | |
 |---|---|
-| **Desktop app** (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.5/ai999x-control-systems-1.6.5-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.5/ai999x-control-systems-1.6.5-linux-x86_64.tar.gz) |
-| **Command line** `control-systems` (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.4/ai999x-cli-1.6.4-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.4/ai999x-cli-1.6.4-linux-x86_64.tar.gz) |
+| **Desktop app** (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-control-systems-1.6.6-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-control-systems-1.6.6-linux-x86_64.tar.gz) |
+| **Command line** `control-systems` (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-cli-1.6.6-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-cli-1.6.6-linux-x86_64.tar.gz) |
 | **Browser** (any device) | [Try it on the model page](https://www.ai999x.com/models/control-systems-ai999x/#capabilities) |
 | **Python** 3.10+ | `pip install control-systems-ai999x`: on Windows and Linux (x86-64) `pip` installs the same compiled engine; on other systems (macOS, ARM) it installs a pure-Python build that gives the same answers |
 
@@ -204,115 +204,6 @@ zeta = 0.4559498108
 pole_angle_deg = 62.87393661
 ```
 
-## Rust library: 15 examples
-
-The crate `control-systems-ai999x` (in `rust/` of the GitHub repository) answers a JSON request with `control_systems_ai999x::solve_json`. Each call below was compiled and run on this release; the comment under it is what it printed. The whole program is `rust/control-systems/examples/readme.rs`: `cd rust && cargo run --release --example readme -p control-systems-ai999x`.
-
-```rust
-use serde_json::{json, Value};
-
-fn show(request: Value) {
-    let answer: Value = serde_json::from_str(&control_systems_ai999x::solve_json(&request.to_string())).unwrap();
-    println!("{}", answer["outcome"].as_str().unwrap_or(""));
-    for v in answer["values"].as_array().into_iter().flatten() {
-        let unit = v[2].as_str().unwrap_or("");
-        let unit = if unit.is_empty() || unit == "1" { String::new() } else { format!(" {unit}") };
-        println!("{} = {}{}", v[0].as_str().unwrap_or(""), v[1], unit);
-    }
-}
-
-show(json!({"key": "ctrl_lag_design", "inputs": {"beta": "10", "w_c": "1"}}));
-// SOLVED
-// zero = 0.1
-// pole = 0.01
-// dc_gain = 10.0
-// phase_deg = -5.13765443982
-// magnitude_db = 0.0427794650578
-
-show(json!({"key": "ctrl_specs_to_poles", "inputs": {"OS": "0.1630335348", "Ts": "2"}}));
-// SOLVED
-// zeta = 0.500000000027
-// wn = 3.99999999978 rad/s
-// sigma = 2.0
-// wd = 3.46410161488 rad/s
-// char_poly = [1.0,4.0,15.9999999982]
-
-show(json!({"key": "ctrl_backward_euler", "inputs": {"num": [1], "den": [1, 1], "T": "0.1"}}));
-// SOLVED
-// numz = [0.0909090909091,0.0]
-// denz = [1.0,-0.909090909091]
-
-show(json!({"key": "ctrl_kalman_scalar_step", "inputs": {"x": "0", "P": "1", "a": "1", "q": "1", "r": "2", "z": "4"}}));
-// SOLVED
-// x_pred = 0.0
-// P_pred = 2.0
-// gain = 0.5
-// x_post = 2.0
-// P_post = 1.0
-
-show(json!({"key": "ctrl_bandwidth", "inputs": {"num": [1], "den": [1, 1]}}));
-// SOLVED
-// wb = 1.0 rad/s
-// dc_gain = 1.0
-
-show(json!({"key": "ctrl_log_decrement", "inputs": {"x1": "1", "xn": "0.5", "n": "1"}}));
-// SOLVED
-// delta = 0.69314718056
-// zeta = 0.109652580999
-
-show(json!({"key": "ctrl_dc_motor", "inputs": {"J": "0.01", "b": "0.1", "Kt": "0.01", "R": "1", "L": "0.5"}}));
-// SOLVED
-// num = [0.01]
-// den = [0.005,0.06,0.1001]
-// dc_gain = 0.0999000999001
-// poles = [-9.99749921826,-2.00250078174]
-
-show(json!({"key": "ctrl_lqr", "inputs": {"A": [[0, 1], [0, 0]], "B": [0, 1], "Q": [[1, 0], [0, 1]], "R": "1"}}));
-// SOLVED
-// K = [1.0,1.73205080757]
-// P = [[1.73205080757,1.0],[1.0,1.73205080757]]
-// poles = [{"re":-0.866025403784,"im":-0.5},{"re":-0.866025403784,"im":0.5}]
-
-show(json!({"key": "ctrl_pid_closed_loop", "inputs": {"num": [1], "den": [1, 1], "Kp": "3", "Ki": "2"}}));
-// SOLVED
-// char_poly = [1.0,4.0,2.0]
-// poles = [-3.41421356237,-0.585786437627]
-// max_real_part = -0.585786437627
-// stable = true
-
-show(json!({"key": "ctrl_arrival_angle", "inputs": {"num": [1, 2, 2], "den": [1, 0]}}));
-// SOLVED
-// zero = {"re":-1.0,"im":1.0}
-// arrival_deg = -135.0
-
-show(json!({"key": "ctrl_lyapunov", "inputs": {"A": [[-1, 0], [0, -2]], "Q": [[2, 0], [0, 4]]}}));
-// SOLVED
-// P = [[1.0,0.0],[0.0,1.0]]
-// positive_definite = true
-
-show(json!({"key": "ctrl_state_feedback_poles", "inputs": {"A": [[0, 1], [0, 0]], "B": [0, 1], "K": [4, 4]}}));
-// SOLVED
-// char_poly = [1.0,4.0,4.0]
-// poles = [-2.0,-2.0]
-// stable = true
-
-show(json!({"key": "ctrl_error_constants", "inputs": {"num": [10], "den": [1, 3, 2], "input": "step"}}));
-// SOLVED
-// system_type = 0
-// K_static = 5.0
-// ess = 0.166666666667
-
-show(json!({"key": "ctrl_pade", "inputs": {"theta": "2", "n": "1"}}));
-// SOLVED
-// num = [-1.0,1.0]
-// den = [1.0,1.0]
-
-show(json!({"key": "ctrl_damping_from_overshoot", "inputs": {"OS": "0.2"}}));
-// SOLVED
-// zeta = 0.455949810769
-// pole_angle_deg = 62.8739366084
-```
-
 ## Guides
 
 - Desktop app guide: the window, every calculation, scenes and charts: [PDF](https://huggingface.co/AI999X/control-systems-ai999x/blob/main/docs/control_systems_ai999x_desktop_guide.pdf) · [HTML](https://huggingface.co/AI999X/control-systems-ai999x/blob/main/docs/control_systems_ai999x_desktop_guide.html) · [Markdown](https://huggingface.co/AI999X/control-systems-ai999x/blob/main/docs/control_systems_ai999x_desktop_guide.md)
@@ -321,7 +212,7 @@ show(json!({"key": "ctrl_damping_from_overshoot", "inputs": {"OS": "0.2"}}));
 
 Every calculation, with its formula, a worked example and its figures: **[Control Systems on ai999x.com](https://www.ai999x.com/models/control-systems-ai999x/)**. Install guides for the app and the command line: [https://www.ai999x.com/desktop-cli/](https://www.ai999x.com/desktop-cli/).
 
-Version 1.6.4 · License: Apache-2.0 · Author: Ibnul Jaif Farabi · Organization: AI999X · Contact: support@ai999x.com · [Support the project](https://buymeacoffee.com/ibnuljaiffarabi)
+Version 1.6.6 · License: Apache-2.0 · Author: Ibnul Jaif Farabi · Organization: AI999X · Contact: support@ai999x.com · [Support the project](https://buymeacoffee.com/ibnuljaiffarabi)
 
 *The Future Is Self-Improving.*
 
